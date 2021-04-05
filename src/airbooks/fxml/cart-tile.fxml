@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="50.0" prefWidth="300.0" style="-fx-border-color: black; -fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airbooks.controller.CartTileController">
+<AnchorPane stylesheets="@../css/style.css" prefHeight="50.0" prefWidth="300.0" style="-fx-border-color: black; -fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airbooks.controller.CartTileController">
    <children>
       <VBox alignment="CENTER" prefHeight="50.0" prefWidth="250.0">
          <children>

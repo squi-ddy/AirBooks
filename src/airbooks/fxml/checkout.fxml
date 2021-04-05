@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airbooks.controller.CheckoutController">
+<BorderPane stylesheets="@../css/style.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airbooks.controller.CheckoutController">
    <top>
       <FlowPane alignment="CENTER" style="-fx-border-color: black; -fx-border-width: 0 0 1 0; -fx-background-color: lightcyan;" BorderPane.alignment="CENTER">
          <children>
@@ -41,7 +41,7 @@
                </VBox.margin>
             </TextField>
             <Button mnemonicParsing="false" onAction="#findSCSAction" text="Find Collection Stations" />
-            <ScrollPane hbarPolicy="NEVER" maxWidth="-Infinity" prefHeight="250.0" style="-fx-background: none; -fx-border-color: black;" vbarPolicy="NEVER">
+            <ScrollPane hbarPolicy="NEVER" maxWidth="-Infinity" prefHeight="250.0" vbarPolicy="NEVER">
                <VBox.margin>
                   <Insets bottom="3.0" top="15.0" />
                </VBox.margin>
