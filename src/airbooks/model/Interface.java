@@ -3,14 +3,13 @@ package airbooks.model;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.channels.ClosedChannelException;
 import java.util.ArrayList;
 
 public class Interface {
-    private static final Security sec = new Security("src/airbooks/csv/Secure.csv");;
+    private static final Security sec = new Security("src/airbooks/csv/Secure.csv");
     private static final Database db = new Database("src/airbooks/csv/Student.csv", "src/airbooks/csv/Books.csv",
-            "src/airbooks/csv/SelfCollectStn.csv", "src/airbooks/csv/DistrictAreas.csv");;
-    private static final ArrayList<Book> rentalCart = new ArrayList<>();;
+            "src/airbooks/csv/SelfCollectStn.csv", "src/airbooks/csv/DistrictAreas.csv");
+    private static final ArrayList<Book> rentalCart = new ArrayList<>();
 
     public static int login(String username, String password) {
         if (sec.login(username, password)) {
@@ -77,11 +76,11 @@ public class Interface {
     }
 
     public static void checkout(String postal, int lockerNo) {
-        getCurrentAccount().deductFromWallet(getCartSum());
         for (Book book : rentalCart) {
             getCurrentAccount().rentBook(book);
             transact(book, postal, lockerNo);
         }
+        getCurrentAccount().deductFromWallet(getCartSum());
         rentalCart.clear();
         db.writeBook("src/airbooks/csv/Books.csv");
         sec.writeAccount("src/airbooks/csv/Secure.csv");
@@ -94,7 +93,7 @@ public class Interface {
                     b.getRentalDate(), postal, lockerNo);
             out.close();
         } catch (IOException e) {
-            return;
+            e.printStackTrace();
         }
     }
 
