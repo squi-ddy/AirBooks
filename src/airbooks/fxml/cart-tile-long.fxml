@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" onMouseClicked="#selectAction" prefHeight="50.0" prefWidth="900.0" style="-fx-border-color: black; -fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airbooks.controller.CartTileLongController">
+   <children>
+      <Label fx:id="bookNameLabel" alignment="CENTER" text="Book1">
+         <VBox.margin>
+            <Insets bottom="2.0" left="3.0" right="3.0" />
+         </VBox.margin></Label>
+      <FlowPane alignment="CENTER">
+         <children>
+            <Label fx:id="subjectCodeLabel" text="MA" textFill="DARKGRAY">
+               <FlowPane.margin>
+                  <Insets right="15.0" />
+               </FlowPane.margin>
+            </Label>
+            <Label fx:id="ISBNLabel" alignment="TOP_CENTER" text="ISBN 978-92-95055-02-5" textFill="DARKGRAY">
+               <FlowPane.margin>
+                  <Insets right="15.0" />
+               </FlowPane.margin></Label>
+            <Label fx:id="rentalInfoLabel" text="Available - $14.00, 14 days" textFill="DARKGRAY">
+               <FlowPane.margin>
+                  <Insets />
+               </FlowPane.margin>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets left="3.0" right="3.0" />
+         </VBox.margin>
+      </FlowPane>
+   </children>
+</VBox>
