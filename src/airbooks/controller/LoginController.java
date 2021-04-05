@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class LoginController {
     @FXML
-    private TextField passwordTF;
+    private PasswordField passwordTF;
     @FXML
     private TextField usernameTF;
 
@@ -35,9 +35,14 @@ public class LoginController {
     private void loginAction(ActionEvent e) throws IOException {
         int status = Interface.login(usernameTF.getText().strip(), passwordTF.getText().strip());
         if (status == -1) {
-            var err = new Alert(Alert.AlertType.ERROR);
-            err.setTitle("Error!");
-            err.setContentText("Invalid username/password!");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
+            Parent root = loader.load();
+            loader.<ErrorController>getController().init("Invalid input!", "Username or password is incorrect.");
+            Stage err = new Stage();
+            err.setScene(new Scene(root));
+            err.setTitle("Error");
+            err.initModality(Modality.WINDOW_MODAL);
+            err.initOwner(loginStage);
             err.showAndWait();
         }
         else if (status == 0) {

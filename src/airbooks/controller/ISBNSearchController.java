@@ -36,12 +36,17 @@ public class ISBNSearchController {
     private Book book;
 
     @FXML
-    private void searchAction(ActionEvent event) {
+    private void searchAction(ActionEvent event) throws IOException {
         book = Interface.getBookByISBN(ISBNTF.getText());
         if (book == null) {
-            var err = new Alert(Alert.AlertType.ERROR);
-            err.setTitle("Error!");
-            err.setContentText("Invalid ISBN!");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
+            Parent root = loader.load();
+            loader.<ErrorController>getController().init("Invalid input!", "No book with such ISBN exists.");
+            Stage err = new Stage();
+            err.setScene(new Scene(root));
+            err.setTitle("Error");
+            err.initModality(Modality.WINDOW_MODAL);
+            err.initOwner(bookInfoVBox.getScene().getWindow());
             err.showAndWait();
             return;
         }
@@ -49,12 +54,17 @@ public class ISBNSearchController {
     }
 
     @FXML
-    private void returnBookAction(ActionEvent event) {
+    private void returnBookAction(ActionEvent event) throws IOException {
         boolean status = Interface.returnBook(book);
         if (!status) {
-            var err = new Alert(Alert.AlertType.ERROR);
-            err.setTitle("Error!");
-            err.setContentText("Cannot return book, as it will exceed $25.00!");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
+            Parent root = loader.load();
+            loader.<ErrorController>getController().init("Cannot return book!", "Returning this book would exceed the $25.00 limit.");
+            Stage err = new Stage();
+            err.setScene(new Scene(root));
+            err.setTitle("Error");
+            err.initModality(Modality.WINDOW_MODAL);
+            err.initOwner(bookInfoVBox.getScene().getWindow());
             err.showAndWait();
         }
         ISBNTF.getScene().getWindow().hide();

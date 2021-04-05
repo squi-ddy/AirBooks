@@ -117,7 +117,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="subjCB" prefWidth="100.0" style="-fx-border-color: black; -fx-background-color: none; -fx-font-size: 12;">
+                  <ComboBox fx:id="subjCB" prefWidth="100.0">
                      <VBox.margin>
                         <Insets bottom="5.0" top="3.0" />
                      </VBox.margin>

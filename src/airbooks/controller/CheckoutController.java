@@ -28,9 +28,14 @@ public class CheckoutController {
     private void findSCSAction(ActionEvent e) throws IOException {
         var possible = Interface.getNearbySCS(postalTF.getText());
         if (possible == null) {
-            var err = new Alert(Alert.AlertType.ERROR);
-            err.setTitle("Error!");
-            err.setContentText("No nearby collection stations!");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
+            Parent root = loader.load();
+            loader.<ErrorController>getController().init("No stations nearby!", "Enter another postal code.");
+            Stage err = new Stage();
+            err.setScene(new Scene(root));
+            err.setTitle("Error");
+            err.initModality(Modality.WINDOW_MODAL);
+            err.initOwner(selectButton.getScene().getWindow());
             err.showAndWait();
         } else {
             SCSListVBox.getChildren().clear();
@@ -50,9 +55,14 @@ public class CheckoutController {
     private void chooseSCSAction(ActionEvent e) throws IOException {
         SelfCollectStn scs = SCSTileController.getSelected();
         if (scs == null) {
-            var err = new Alert(Alert.AlertType.ERROR);
-            err.setTitle("Error!");
-            err.setContentText("Select a collection station!");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
+            Parent root = loader.load();
+            loader.<ErrorController>getController().init("Invalid input!", "Please select a station.");
+            Stage err = new Stage();
+            err.setScene(new Scene(root));
+            err.setTitle("Error");
+            err.initModality(Modality.WINDOW_MODAL);
+            err.initOwner(selectButton.getScene().getWindow());
             err.showAndWait();
             return;
         }

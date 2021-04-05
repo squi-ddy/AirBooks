@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class StudentController implements Initializable {
@@ -45,14 +44,24 @@ public class StudentController implements Initializable {
     @FXML
     private void checkoutAction(ActionEvent event) throws IOException {
         if (Interface.getCartSum() > Interface.getCurrentAccount().getWallet()) {
-            var err = new Alert(Alert.AlertType.ERROR);
-            err.setTitle("Error!");
-            err.setContentText("Not enough money!");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
+            Parent root = loader.load();
+            loader.<ErrorController>getController().init("Not enough money!", "Deposit for books in rental cart cannot be paid.");
+            Stage err = new Stage();
+            err.setScene(new Scene(root));
+            err.setTitle("Error");
+            err.initModality(Modality.WINDOW_MODAL);
+            err.initOwner(subjCB.getScene().getWindow());
             err.showAndWait();
         } else if (Interface.getCart().size() == 0) {
-            var err = new Alert(Alert.AlertType.ERROR);
-            err.setTitle("Error!");
-            err.setContentText("Nothing in cart!");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
+            Parent root = loader.load();
+            loader.<ErrorController>getController().init("Nothing in cart!", "Rental cart is empty.");
+            Stage err = new Stage();
+            err.setScene(new Scene(root));
+            err.setTitle("Error");
+            err.initModality(Modality.WINDOW_MODAL);
+            err.initOwner(subjCB.getScene().getWindow());
             err.showAndWait();
         } else {
             Parent root = FXMLLoader.load(getClass().getResource("/airbooks/fxml/checkout.fxml"));
