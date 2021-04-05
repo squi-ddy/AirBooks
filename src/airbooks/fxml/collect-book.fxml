@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.PasswordField?>
 <BorderPane stylesheets="@../css/style.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airbooks.controller.CollectBookController">
     <top>
         <FlowPane alignment="CENTER" style="-fx-border-color: black; -fx-border-width: 0 0 1 0; -fx-background-color: lightcyan;" BorderPane.alignment="CENTER">
@@ -76,11 +77,11 @@
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="passwordTF" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+                  <PasswordField fx:id="passwordTF" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>
-                  </TextField>
+                  </PasswordField>
                </children>
             </GridPane>
                 <Button mnemonicParsing="false" onAction="#findSCSAction" text="Unlock">
