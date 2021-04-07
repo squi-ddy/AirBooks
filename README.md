@@ -19,4 +19,7 @@ Online book rental has never been easier!
 <sup>3</sup>Not by choice (also this repo is private)
 
 ## Reason this exists
-- CS3231 Object-Oriented Programming: Programming Assignment
+- CS3231 Object-Oriented Programming I: Programming Assignment
+
+### Development stage
+All features complete. Currently, refinement of the UI and bug-fixing is in progress.
