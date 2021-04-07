@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 
@@ -39,7 +40,7 @@ public class AdminController implements Initializable  {
 
     @FXML
     private void aboutAction(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/airbooks/fxml/about.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/fxml/about.fxml")));
         Stage window = new Stage();
         window.setScene(new Scene(root));
         window.setTitle("About");
@@ -50,7 +51,7 @@ public class AdminController implements Initializable  {
 
     @FXML
     private void ISBNSearchAction() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/airbooks/fxml/isbn.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/fxml/isbn.fxml")));
         Stage window = new Stage();
         window.setScene(new Scene(root));
         root.requestFocus();

@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CheckoutController {
     @FXML
@@ -83,7 +84,7 @@ public class CheckoutController {
 
     @FXML
     private void aboutAction(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/airbooks/fxml/about.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/fxml/about.fxml")));
         Stage window = new Stage();
         window.setScene(new Scene(root));
         window.setTitle("About");

@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class StudentController implements Initializable {
@@ -70,7 +71,7 @@ public class StudentController implements Initializable {
             err.initOwner(subjCB.getScene().getWindow());
             err.showAndWait();
         } else {
-            Parent root = FXMLLoader.load(getClass().getResource("/airbooks/fxml/checkout.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/fxml/checkout.fxml")));
             Stage main = new Stage();
             main.setScene(new Scene(root));
             main.setTitle("Checkout");
@@ -122,7 +123,7 @@ public class StudentController implements Initializable {
 
     @FXML
     private void collectLockerAction() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/airbooks/fxml/collect-book.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/fxml/collect-book.fxml")));
         Stage main = new Stage();
         main.setScene(new Scene(root));
         main.setTitle("Collect from Locker");
@@ -134,7 +135,7 @@ public class StudentController implements Initializable {
 
     @FXML
     private void aboutAction(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/airbooks/fxml/about.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/fxml/about.fxml")));
         Stage window = new Stage();
         window.setScene(new Scene(root));
         window.setTitle("About");

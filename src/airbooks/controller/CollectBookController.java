@@ -13,6 +13,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class CollectBookController {
     @FXML
@@ -26,7 +27,7 @@ public class CollectBookController {
     private void collectAction() throws IOException {
         int status = Interface.collectFromLocker(postalTF.getText(), lockerNoTF.getText(), passwordTF.getText());
         if (status == 0) {
-            Parent root = FXMLLoader.load(getClass().getResource("/airbooks/fxml/confirm-locker.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/fxml/confirm-locker.fxml")));
             Stage window = new Stage();
             window.setScene(new Scene(root));
             window.setTitle("Confirmation");
@@ -59,7 +60,7 @@ public class CollectBookController {
 
     @FXML
     private void aboutAction(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/airbooks/fxml/about.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/fxml/about.fxml")));
         Stage window = new Stage();
         window.setScene(new Scene(root));
         window.setTitle("About");
