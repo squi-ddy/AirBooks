@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airbooks.controller.ConfirmRentController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airbooks.controller.ConfirmRentController">
    <top>
       <ImageView fitHeight="153.0" fitWidth="261.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
@@ -36,9 +37,9 @@
                   <Insets bottom="10.0" top="25.0" />
                </VBox.margin>
             </Label>
-            <Label text="Required information to collect your books:">
+            <Label text="Required information to collect your books">
                <VBox.margin>
-                  <Insets bottom="10.0" />
+                  <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
             <GridPane maxHeight="-Infinity" maxWidth="-Infinity">
@@ -52,7 +53,6 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Pane style="-fx-border-color: black; -fx-border-width: 1 1 1 0;" GridPane.columnIndex="1" />
                   <Label text="Password" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" right="10.0" />
@@ -68,26 +68,27 @@
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label fx:id="lockerNoLabel" text="14" GridPane.columnIndex="1">
-                     <GridPane.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label fx:id="passwordLabel" text="abcdef" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label fx:id="postalCodeLabel" text="122518" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </GridPane.margin>
-                  </Label>
+                  <Pane style="-fx-border-color: black; -fx-border-width: 1 1 1 0;" GridPane.columnIndex="1" />
                   <Pane style="-fx-border-color: black;" />
                   <Pane style="-fx-border-color: black; -fx-border-width: 0 1 0 1;" GridPane.rowIndex="1" />
                   <Pane style="-fx-border-color: black; -fx-border-width: 0 1 0 0;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Pane style="-fx-border-color: black;" GridPane.rowIndex="2" />
                   <Pane style="-fx-border-color: black; -fx-border-width: 1 1 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="lockerNoLabel" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="80.0" styleClass="copyable-label" text="14" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="passwordLabel" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="80.0" styleClass="copyable-label" text="abcdefgh" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="postalCodeLabel" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="80.0" styleClass="copyable-label" text="122312" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </TextField>
                </children>
             </GridPane>
          </children>

@@ -84,7 +84,7 @@
                   </PasswordField>
                </children>
             </GridPane>
-                <Button mnemonicParsing="false" onAction="#findSCSAction" text="Unlock">
+                <Button mnemonicParsing="false" onAction="#collectAction" text="Unlock">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin></Button>

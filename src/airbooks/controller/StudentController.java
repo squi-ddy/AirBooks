@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -88,6 +89,11 @@ public class StudentController implements Initializable {
             VBox.setMargin(root, new Insets(0, 0, 1, 0));
             rentBooksVBox.getChildren().add(root);
         }
+        if (books.size() == 0) {
+            var resLabel = new Label("No results!");
+            VBox.setMargin(resLabel, new Insets(5, 0, 5, 0));
+            rentBooksVBox.getChildren().add(resLabel);
+        }
     }
 
     @FXML
@@ -106,8 +112,15 @@ public class StudentController implements Initializable {
     }
 
     @FXML
-    private void collectLockerAction(ActionEvent event) {
-
+    private void collectLockerAction(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/airbooks/fxml/collect-book.fxml"));
+        Stage main = new Stage();
+        main.setScene(new Scene(root));
+        main.setTitle("Collect from Locker");
+        main.initModality(Modality.WINDOW_MODAL);
+        main.initOwner(accNameLabel.getScene().getWindow());
+        main.showAndWait();
+        reload();
     }
 
     @FXML

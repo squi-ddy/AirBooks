@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class ConfirmLockerController {
     @FXML
-    private VBox x;
+    private VBox dummy;
 
     @FXML
     private void aboutAction(ActionEvent e) throws IOException {
@@ -22,7 +22,7 @@ public class ConfirmLockerController {
         window.setScene(new Scene(root));
         window.setTitle("About");
         window.initModality(Modality.WINDOW_MODAL);
-        window.initOwner(x.getScene().getWindow());
+        window.initOwner(dummy.getScene().getWindow());
         window.showAndWait();
     }
 }

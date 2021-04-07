@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane stylesheets="@../css/style.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airbooks.controller.CheckoutController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: white;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airbooks.controller.CheckoutController">
    <top>
       <FlowPane alignment="CENTER" style="-fx-border-color: black; -fx-border-width: 0 0 1 0; -fx-background-color: lightcyan;" BorderPane.alignment="CENTER">
          <children>
@@ -46,7 +46,7 @@
                   <Insets bottom="3.0" top="15.0" />
                </VBox.margin>
                <content>
-                  <VBox fx:id="SCSListVBox" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="500.0" />
+                  <VBox fx:id="SCSListVBox" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="500.0" />
                </content>
             </ScrollPane>
             <Button fx:id="selectButton" mnemonicParsing="false" onAction="#chooseSCSAction" text="Select" />

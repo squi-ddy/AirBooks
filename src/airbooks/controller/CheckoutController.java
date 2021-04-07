@@ -1,5 +1,6 @@
 package airbooks.controller;
 
+import airbooks.model.Book;
 import airbooks.model.Interface;
 import airbooks.model.Locker;
 import airbooks.model.SelfCollectStn;
@@ -15,6 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class CheckoutController {
     @FXML
@@ -27,18 +29,12 @@ public class CheckoutController {
     @FXML
     private void findSCSAction(ActionEvent e) throws IOException {
         var possible = Interface.getNearbySCS(postalTF.getText());
+        SCSListVBox.getChildren().clear();
         if (possible == null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
-            Parent root = loader.load();
-            loader.<ErrorController>getController().init("No stations nearby!", "Enter another postal code.");
-            Stage err = new Stage();
-            err.setScene(new Scene(root));
-            err.setTitle("Error");
-            err.initModality(Modality.WINDOW_MODAL);
-            err.initOwner(selectButton.getScene().getWindow());
-            err.showAndWait();
+            var resLabel = new Label("No results!");
+            VBox.setMargin(resLabel, new Insets(5, 0, 5, 0));
+            SCSListVBox.getChildren().add(resLabel);
         } else {
-            SCSListVBox.getChildren().clear();
             for (SelfCollectStn scs : possible) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/scs-tile.fxml"));
                 VBox root = loader.load();
@@ -68,7 +64,7 @@ public class CheckoutController {
         }
         int lockerNum = scs.getEmptyLockerNum();
         Locker locker = scs.getLocker(lockerNum);
-        String password = locker.placeItem(Interface.getCurrentStudent().getStudentID(), Interface.getCart());
+        String password = locker.placeItem(Interface.getCurrentStudent().getStudentID(), (ArrayList<Book>) Interface.getCart().clone());
         Interface.checkout(scs.getPostalCode(), lockerNum);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/confirm-rent.fxml"));
         Parent root = loader.load();

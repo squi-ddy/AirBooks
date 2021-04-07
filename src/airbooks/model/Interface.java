@@ -118,4 +118,19 @@ public class Interface {
             return null;
         }
     }
+
+    public static int collectFromLocker(String postal, String lockerNum, String password) {
+        // 0 -> success, 1 -> invalid info, 2 -> not your locker
+        try {
+            SelfCollectStn scs = db.getSelfCollection(postal);
+            Locker locker = scs.getLocker(Integer.parseInt(lockerNum));
+            if (!locker.getStudentID().equals(getCurrentStudent().getStudentID())) return 2;
+            String[] result = locker.unlockLocker(password).split("\n+");
+            if (result[0].matches("Thank you.+")) return 0;
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 1;
+        }
+    }
 }
