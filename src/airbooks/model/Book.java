@@ -6,12 +6,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Book {
-    private String title;
-    private String author;
-    private String ISBN;
-    private String subjectCode;
-    private double deposit;
-    private int rentalPeriod;
+    private final String title;
+    private final String author;
+    private final String ISBN;
+    private final String subjectCode;
+    private final double deposit;
+    private final int rentalPeriod;
 
     private boolean isRented;
     private String studentID;
@@ -99,8 +99,7 @@ public class Book {
     public String getRentalDate() {
         if (rentalDate == null) return null;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateString = format.format(rentalDate);
-        return dateString;
+        return format.format(rentalDate);
     }
 
     public void setRentalDate(Date rentalDate){
@@ -123,10 +122,7 @@ public class Book {
                 sum += digit*3;
         }
         sum = 10 - sum % 10;
-        if ((sum == 10 && checkDigit == 0) || sum == checkDigit)
-            return true;
-        else
-            return false;
+        return (sum == 10 && checkDigit == 0) || sum == checkDigit;
     }
 
     @Override

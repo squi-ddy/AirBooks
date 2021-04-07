@@ -2,13 +2,17 @@ package airbooks.controller;
 
 import airbooks.model.Book;
 import airbooks.model.Interface;
+import airbooks.model.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -36,7 +40,7 @@ public class ISBNSearchController {
     private Book book;
 
     @FXML
-    private void searchAction(ActionEvent event) throws IOException {
+    private void searchAction() throws IOException {
         book = Interface.getBookByISBN(ISBNTF.getText());
         if (book == null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
@@ -54,7 +58,7 @@ public class ISBNSearchController {
     }
 
     @FXML
-    private void returnBookAction(ActionEvent event) throws IOException {
+    private void returnBookAction() throws IOException {
         boolean status = Interface.returnBook(book);
         if (!status) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
@@ -71,18 +75,18 @@ public class ISBNSearchController {
     }
 
     @FXML
-    private void closeAction(ActionEvent event) {
+    private void closeAction() {
         ISBNTF.getScene().getWindow().hide();
     }
 
     @FXML
-    private void aboutAction(ActionEvent event) throws IOException {
+    private void aboutAction(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/airbooks/fxml/about.fxml"));
         Stage window = new Stage();
         window.setScene(new Scene(root));
         window.setTitle("About");
         window.initModality(Modality.WINDOW_MODAL);
-        window.initOwner(ISBNTF.getScene().getWindow());
+        window.initOwner(((Hyperlink)e.getSource()).getScene().getWindow());
         window.showAndWait();
     }
 
@@ -91,7 +95,8 @@ public class ISBNSearchController {
         subjectCodeLabel.setText(book.getSubjectCode());
         ISBNLabel.setText("ISBN " + Interface.convertISBN(book.getISBN()));
         if (book.getIsRented()) {
-            rentalInfoLabel.setText("Unavailable");
+            Student student = Interface.getStudentById(book.getStudentID());
+            rentalInfoLabel.setText(String.format("Rented - %s", student == null ? book.getStudentID() : (student.getName() + " (" + student.getStudentID() + ")")));
             rentalInfoLabel.setTextFill(Color.web("#CD5C5C"));
             returnBookButton.setDisable(false);
         } else {

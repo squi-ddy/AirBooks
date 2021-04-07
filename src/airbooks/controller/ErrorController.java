@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -18,7 +19,7 @@ public class ErrorController {
     private Label infoLabel;
 
     @FXML
-    private void closeAction(ActionEvent e) {
+    private void closeAction() {
         headerLabel.getScene().getWindow().hide();
     }
 
@@ -29,7 +30,7 @@ public class ErrorController {
         window.setScene(new Scene(root));
         window.setTitle("About");
         window.initModality(Modality.WINDOW_MODAL);
-        window.initOwner(headerLabel.getScene().getWindow());
+        window.initOwner(((Hyperlink)e.getSource()).getScene().getWindow());
         window.showAndWait();
     }
 

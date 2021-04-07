@@ -13,10 +13,35 @@
     -fx-border-width: 1;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
+    -fx-effect: none;
 }
 
 .button:hover {
     -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 0);
+}
+
+.button:armed {
+    -fx-effect: none;
+}
+
+.hyperlink {
+    -fx-border-color: transparent;
+    -fx-padding: 4 0 4 0;
+}
+
+.hyperlink:hover, .hyperlink:visited:hover {
+    -fx-underline: true;
+}
+
+.hyperlink:visited {
+    -fx-text-fill: -fx-accent;
+    -fx-underline: false;
+}
+
+.hyperlink:armed {
+    -fx-text-fill: -fx-text-background-color;
+    -fx-underline: true;
 }
 
 .combo-box {

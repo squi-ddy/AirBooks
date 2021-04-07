@@ -8,18 +8,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class StudentController implements Initializable {
@@ -32,9 +35,11 @@ public class StudentController implements Initializable {
     @FXML
     private Label cartInfoLabel;
     @FXML
-    private ComboBox subjCB;
+    private ComboBox<String> subjCB;
     @FXML
     private VBox rentBooksVBox;
+
+    private String searchedSubject;
 
     @FXML
     private void logoutAction(MouseEvent event) {
@@ -43,7 +48,7 @@ public class StudentController implements Initializable {
     }
 
     @FXML
-    private void checkoutAction(ActionEvent event) throws IOException {
+    private void checkoutAction() throws IOException {
         if (Interface.getCartSum() > Interface.getCurrentAccount().getWallet()) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
             Parent root = loader.load();
@@ -77,9 +82,9 @@ public class StudentController implements Initializable {
     }
 
     @FXML
-    private void findAction(ActionEvent event) throws IOException {
+    private void findAction() throws IOException {
         rentBooksVBox.getChildren().clear();
-        String subject = (String)subjCB.getValue();
+        String subject = subjCB.getValue();
         var books = Interface.getBooksBySubjectCode(subject);
         for (Book book : books) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/cart-tile-long.fxml"));
@@ -94,25 +99,29 @@ public class StudentController implements Initializable {
             VBox.setMargin(resLabel, new Insets(5, 0, 5, 0));
             rentBooksVBox.getChildren().add(resLabel);
         }
+        searchedSubject = subject;
     }
 
     @FXML
-    private void cartAction(ActionEvent event) throws IOException {
+    private void cartAction() throws IOException {
         rentBooksVBox.getChildren().clear();
-        for (Book book : CartTileLongController.getSelected()) {
+        ArrayList<Book> selected = CartTileLongController.getSelected();
+        if (selected == null) return;
+        for (Book book : selected) {
             Interface.getCart().add(book);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/cart-tile.fxml"));
             AnchorPane root = loader.load();
-            loader.<CartTileController>getController().init(book, this);
+            loader.<CartTileController>getController().init(book, this::onTrash);
             VBox.setMargin(root, new Insets(0, 0, 1, 0));
             rentalCartVBox.getChildren().add(root);
         }
         CartTileLongController.getSelected().clear();
-        updateCartInfo();
+        reload();
+        cartInfoLabel.setText(String.format("%d books, $%.2f", Interface.getCart().size(), Interface.getCartSum()));
     }
 
     @FXML
-    private void collectLockerAction(ActionEvent event) throws IOException {
+    private void collectLockerAction() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/airbooks/fxml/collect-book.fxml"));
         Stage main = new Stage();
         main.setScene(new Scene(root));
@@ -124,28 +133,53 @@ public class StudentController implements Initializable {
     }
 
     @FXML
-    private void aboutAction(ActionEvent event) throws IOException {
+    private void aboutAction(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/airbooks/fxml/about.fxml"));
         Stage window = new Stage();
         window.setScene(new Scene(root));
         window.setTitle("About");
         window.initModality(Modality.WINDOW_MODAL);
-        window.initOwner(accNameLabel.getScene().getWindow());
+        window.initOwner(((Hyperlink)e.getSource()).getScene().getWindow());
         window.showAndWait();
     }
 
     private void reload() throws IOException {
         walletLabel.setText(String.format("$%.2f", Interface.getCurrentAccount().getWallet()));
-        updateCartInfo();
+        cartInfoLabel.setText(String.format("%d books, $%.2f", Interface.getCart().size(), Interface.getCartSum()));
         rentalCartVBox.getChildren().clear();
         rentBooksVBox.getChildren().clear();
         var books = Interface.getCart();
         for (Book book : books) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/cart-tile.fxml"));
             AnchorPane root = loader.load();
-            loader.<CartTileController>getController().init(book, this);
+            loader.<CartTileController>getController().init(book, this::onTrash);
             VBox.setMargin(root, new Insets(0, 0, 1, 0));
             rentalCartVBox.getChildren().add(root);
+        }
+        if (searchedSubject != null) {
+            var searchedBooks = Interface.getBooksBySubjectCode(searchedSubject);
+            for (Book book : searchedBooks) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/cart-tile-long.fxml"));
+                VBox root = loader.load();
+                var controller = loader.<CartTileLongController>getController();
+                controller.init(book, true);
+                VBox.setMargin(root, new Insets(0, 0, 1, 0));
+                rentBooksVBox.getChildren().add(root);
+            }
+            if (searchedBooks.size() == 0) {
+                var resLabel = new Label("No results!");
+                VBox.setMargin(resLabel, new Insets(5, 0, 5, 0));
+                rentBooksVBox.getChildren().add(resLabel);
+            }
+            subjCB.getSelectionModel().select(searchedSubject);
+        }
+    }
+
+    private void onTrash(Book book) {
+        try {
+            reload();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -154,13 +188,11 @@ public class StudentController implements Initializable {
         try {
             accNameLabel.setText(Interface.getCurrentStudent().getName());
             subjCB.setItems(FXCollections.observableArrayList(Interface.getSubjectCodes()));
+            subjCB.getSelectionModel().select(0);
+            searchedSubject = subjCB.getValue();
             reload();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void updateCartInfo() {
-        cartInfoLabel.setText(String.format("%d books, $%.2f", Interface.getCart().size(), Interface.getCartSum()));
     }
 }

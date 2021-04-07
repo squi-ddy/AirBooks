@@ -6,10 +6,10 @@ import java.util.Random;
 
 public class SelfCollectStn {
     // Attributes
-    private String postalCode;
-    private String areaDetails;
-    private int numOfLockers;
-    private Locker[] lockersArray;
+    private final String postalCode;
+    private final String areaDetails;
+    private final int numOfLockers;
+    private final Locker[] lockersArray;
 
     // Constructors
     public SelfCollectStn(String postalCode, String areaDetails, int numOfLockers) {
@@ -20,7 +20,7 @@ public class SelfCollectStn {
         this.areaDetails = areaDetails;
         this.numOfLockers = numOfLockers;
         this.lockersArray = new Locker[numOfLockers];
-        Arrays.setAll(lockersArray, p -> new Locker(p));
+        Arrays.setAll(lockersArray, Locker::new);
     }
 
     // Accessors

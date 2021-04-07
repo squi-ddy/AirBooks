@@ -23,6 +23,7 @@ public class Interface {
 
     public static void logout() {
         sec.logout();
+        rentalCart.clear();
     }
 
     public static String convertISBN(String ISBN) {
@@ -52,11 +53,11 @@ public class Interface {
     }
 
     public static Student getCurrentStudent() {
-        return db.getStudent(Security.getCurrStudentLogin());
+        return getStudentById(Security.getCurrStudentLogin());
     }
 
     public static Account getCurrentAccount() {
-        return sec.getAccount(Security.getCurrStudentLogin());
+        return getAccountById(Security.getCurrStudentLogin());
     }
 
     public static ArrayList<String> getSubjectCodes() {
@@ -129,8 +130,23 @@ public class Interface {
             if (result[0].matches("Thank you.+")) return 0;
             return 1;
         } catch (Exception e) {
-            e.printStackTrace();
             return 1;
+        }
+    }
+
+    public static Student getStudentById(String studentID) {
+        try {
+            return db.getStudent(studentID);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
+
+    public static Account getAccountById(String studentID) {
+        try {
+            return sec.getAccount(studentID);
+        } catch (IllegalArgumentException e) {
+            return null;
         }
     }
 }

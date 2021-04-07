@@ -16,6 +16,7 @@ public class Main extends Application {
         loader.<LoginController>getController().init(primaryStage);
         primaryStage.setTitle("Login");
         primaryStage.setScene(new Scene(root));
+        root.requestFocus();
         primaryStage.show();
     }
 

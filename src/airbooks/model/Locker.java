@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Locker {
     // Attributes
-    private int lockerNum;
+    private final int lockerNum;
     private String lockerPassword;
     private String studentID;
     private ArrayList<Book> booklist;

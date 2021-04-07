@@ -2,15 +2,14 @@ package airbooks.controller;
 
 import airbooks.model.Book;
 import airbooks.model.Interface;
+import airbooks.model.Student;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
@@ -27,12 +26,12 @@ public class CartTileLongController {
     private boolean selectable;
     private Book book;
     private static ArrayList<Book> selected;
-    private static Consumer<Book> onDoubleClick;
+    private Consumer<Book> onDoubleClick;
 
     @FXML
-    private void selectAction(MouseEvent event) throws InvocationTargetException, IllegalAccessException {
+    private void selectAction(MouseEvent event) {
         if (event.getButton() != MouseButton.PRIMARY) return;
-        if (event.getClickCount() == 1 && selectable) {
+        if ((event.getClickCount() == 1 && selectable) || (event.getClickCount() == 2 && onDoubleClick == null)) {
             VBox src = (VBox) event.getSource();
             if (!selected.contains(book)) {
                 src.setStyle("-fx-border-color: black; -fx-background-color: lightcyan;");
@@ -41,7 +40,7 @@ public class CartTileLongController {
                 src.setStyle("-fx-border-color: black; -fx-background-color: white;");
                 selected.remove(book);
             }
-        } else if (event.getClickCount() == 2 && onDoubleClick != null) {
+        } else if (event.getClickCount() == 2) {
             onDoubleClick.accept(book);
         }
     }
@@ -54,20 +53,22 @@ public class CartTileLongController {
         subjectCodeLabel.setText(book.getSubjectCode());
         ISBNLabel.setText("ISBN " + Interface.convertISBN(book.getISBN()));
         if (book.getIsRented()) {
-            rentalInfoLabel.setText("Unavailable");
+            Student student = Interface.getStudentById(book.getStudentID());
+            rentalInfoLabel.setText(String.format("Rented - %s", student == null ? book.getStudentID() : (student.getName() + " (" + student.getStudentID() + ")")));
             rentalInfoLabel.setTextFill(Color.web("#CD5C5C"));
         } else {
             rentalInfoLabel.setText(String.format("Available - $%.2f, %d days", book.getDeposit(), book.getRentalPeriod()));
             rentalInfoLabel.setTextFill(Color.web("#3CB371"));
         }
-        selected = new ArrayList<Book>();
-    }
-
-    public static void setOnDoubleClick(Consumer<Book> onDoubleClick) {
-        CartTileLongController.onDoubleClick = onDoubleClick;
+        selected = new ArrayList<>();
     }
 
     public static ArrayList<Book> getSelected() {
         return selected;
+    }
+
+    public void init(Book book, boolean selectable, Consumer<Book> onDoubleClick) {
+        this.onDoubleClick = onDoubleClick;
+        init(book, selectable);
     }
 }

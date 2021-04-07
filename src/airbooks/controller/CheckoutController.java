@@ -1,6 +1,5 @@
 package airbooks.controller;
 
-import airbooks.model.Book;
 import airbooks.model.Interface;
 import airbooks.model.Locker;
 import airbooks.model.SelfCollectStn;
@@ -10,8 +9,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -27,7 +29,7 @@ public class CheckoutController {
     private Button selectButton;
 
     @FXML
-    private void findSCSAction(ActionEvent e) throws IOException {
+    private void findSCSAction() throws IOException {
         var possible = Interface.getNearbySCS(postalTF.getText());
         SCSListVBox.getChildren().clear();
         if (possible == null) {
@@ -48,7 +50,7 @@ public class CheckoutController {
     }
 
     @FXML
-    private void chooseSCSAction(ActionEvent e) throws IOException {
+    private void chooseSCSAction() throws IOException {
         SelfCollectStn scs = SCSTileController.getSelected();
         if (scs == null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
@@ -64,13 +66,14 @@ public class CheckoutController {
         }
         int lockerNum = scs.getEmptyLockerNum();
         Locker locker = scs.getLocker(lockerNum);
-        String password = locker.placeItem(Interface.getCurrentStudent().getStudentID(), (ArrayList<Book>) Interface.getCart().clone());
+        String password = locker.placeItem(Interface.getCurrentStudent().getStudentID(), new ArrayList<>(Interface.getCart()));
         Interface.checkout(scs.getPostalCode(), lockerNum);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/confirm-rent.fxml"));
         Parent root = loader.load();
         loader.<ConfirmRentController>getController().init(lockerNum, password, scs.getPostalCode());
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+        root.requestFocus();
         stage.setTitle("Confirmation");
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(SCSListVBox.getScene().getWindow());
@@ -85,7 +88,7 @@ public class CheckoutController {
         window.setScene(new Scene(root));
         window.setTitle("About");
         window.initModality(Modality.WINDOW_MODAL);
-        window.initOwner(postalTF.getScene().getWindow());
+        window.initOwner(((Hyperlink)e.getSource()).getScene().getWindow());
         window.showAndWait();
     }
 }

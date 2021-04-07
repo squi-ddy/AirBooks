@@ -5,50 +5,45 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airbooks.controller.ConfirmLockerController">
     <top>
-        <ImageView fitHeight="153.0" fitWidth="261.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-            <image>
-                <Image url="@airbooks-logo.png" />
-            </image>
+        <ImageView fitHeight="153.0" fitWidth="261.0" pickOnBounds="true" preserveRatio="true"
+                   BorderPane.alignment="CENTER">
             <BorderPane.margin>
-                <Insets bottom="5.0" top="5.0" />
+                <Insets bottom="5.0" top="5.0"/>
             </BorderPane.margin>
+            <Image url="@airbooks-logo.png"/>
         </ImageView>
     </top>
     <center>
-        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: lightcyan; -fx-border-color: black; -fx-border-width: 1 0 1 0;" fx:id="x">
-            <children>
-                <Label text="Thank you for using AirBooks!">
-                    <font>
-                        <Font size="40.0" />
-                    </font>
-                    <VBox.margin>
-                        <Insets bottom="10.0" top="25.0" />
-                    </VBox.margin>
-                </Label>
-                <Label text="Please collect your books. Have a nice day!">
-                    <VBox.margin>
-                        <Insets bottom="10.0" />
-                    </VBox.margin>
-                </Label>
-            </children>
+        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0"
+              style="-fx-background-color: lightcyan; -fx-border-color: black; -fx-border-width: 1 0 1 0;">
             <BorderPane.margin>
-                <Insets />
+                <Insets/>
             </BorderPane.margin>
+            <Label text="Thank you for using AirBooks!">
+                <font>
+                    <Font size="40.0"/>
+                </font>
+                <VBox.margin>
+                    <Insets bottom="10.0" top="25.0"/>
+                </VBox.margin>
+            </Label>
+            <Label text="Please collect your books. Have a nice day!">
+                <VBox.margin>
+                    <Insets bottom="10.0"/>
+                </VBox.margin>
+            </Label>
         </VBox>
     </center>
     <bottom>
         <AnchorPane BorderPane.alignment="CENTER">
-            <children>
-                <Label text="© NUS High School of Math and Science" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="2.0" />
-                <Hyperlink onAction="#aboutAction" text="About the Programmer..." AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0" />
-            </children>
+            <Label text="© NUS High School of Math and Science" AnchorPane.bottomAnchor="2.0"
+                   AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="2.0"/>
+            <Hyperlink onAction="#aboutAction" text="About the Programmer..." AnchorPane.bottomAnchor="0.0"
+                       AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0"/>
         </AnchorPane>
     </bottom>
 </BorderPane>

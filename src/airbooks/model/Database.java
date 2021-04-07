@@ -32,7 +32,7 @@ public class Database {
             }
             csv.close();
         } catch (IOException e) {
-            return;
+            e.printStackTrace();
         }
     }
 
@@ -54,7 +54,7 @@ public class Database {
             }
             csv.close();
         } catch (IOException | NumberFormatException | ParseException e) {
-            return;
+            e.printStackTrace();
         }
     }
 
@@ -69,7 +69,7 @@ public class Database {
             }
             csv.close();
         } catch (IOException | NumberFormatException e) {
-            return;
+            e.printStackTrace();
         }
     }
 
@@ -85,7 +85,7 @@ public class Database {
             csv.close();
             Collections.sort(districtAreas);
         } catch (IOException | NumberFormatException e) {
-            return;
+            e.printStackTrace();
         }
     }
 
@@ -193,7 +193,7 @@ public class Database {
             }
             out.close();
         } catch (IOException e) {
-            return;
+            e.printStackTrace();
         }
     }
 

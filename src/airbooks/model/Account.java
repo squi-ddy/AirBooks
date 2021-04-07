@@ -3,9 +3,9 @@ package airbooks.model;
 import java.util.Date;
 
 public class Account {
-    private String loginID;
-    private String password;
-    private String studentID;
+    private final String loginID;
+    private final String password;
+    private final String studentID;
     private double wallet;
 
     public Account(String loginID, String password, String studentID, double wallet) {

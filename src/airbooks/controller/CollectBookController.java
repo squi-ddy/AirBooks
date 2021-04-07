@@ -6,7 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -21,7 +23,7 @@ public class CollectBookController {
     private PasswordField passwordTF;
 
     @FXML
-    private void collectAction(ActionEvent e) throws IOException {
+    private void collectAction() throws IOException {
         int status = Interface.collectFromLocker(postalTF.getText(), lockerNoTF.getText(), passwordTF.getText());
         if (status == 0) {
             Parent root = FXMLLoader.load(getClass().getResource("/airbooks/fxml/confirm-locker.fxml"));
@@ -62,7 +64,7 @@ public class CollectBookController {
         window.setScene(new Scene(root));
         window.setTitle("About");
         window.initModality(Modality.WINDOW_MODAL);
-        window.initOwner(postalTF.getScene().getWindow());
+        window.initOwner(((Hyperlink)e.getSource()).getScene().getWindow());
         window.showAndWait();
     }
 }
