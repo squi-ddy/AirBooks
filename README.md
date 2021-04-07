@@ -20,3 +20,6 @@ Online book rental has never been easier!
 
 ## Reason this exists
 - CS3231 Object-Oriented Programming: Programming Assignment
+
+### Development stage
+All features complete. Currently, refinement of the UI and bug-fixing is in progress.
