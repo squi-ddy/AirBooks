@@ -4,6 +4,7 @@ import airbooks.model.Book;
 import airbooks.model.Interface;
 import airbooks.model.Student;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -22,33 +23,70 @@ public class CartTileLongController {
     private Label ISBNLabel;
     @FXML
     private Label rentalInfoLabel;
+    @FXML
+    private VBox parentVBox;
 
-    private boolean selectable;
     private Book book;
-    private static ArrayList<Book> selected;
-    private Consumer<Book> onDoubleClick;
+    private static ArrayList<CartTileLongController> selected;
+    private static boolean selectMode;
+    private Consumer<ArrayList<Object>> onClick;
+
+    public static final boolean ONLY_ONE = true;
+    public static final boolean MULTIPLE = false;
 
     @FXML
     private void selectAction(MouseEvent event) {
         if (event.getButton() != MouseButton.PRIMARY) return;
-        if ((event.getClickCount() == 1 && selectable) || (event.getClickCount() == 2 && onDoubleClick == null)) {
-            VBox src = (VBox) event.getSource();
-            if (!selected.contains(book)) {
-                src.setStyle("-fx-border-color: black; -fx-background-color: lightcyan;");
-                selected.add(book);
-            } else {
-                src.setStyle("-fx-border-color: black; -fx-background-color: white;");
-                selected.remove(book);
+        boolean isSelected = !selected.contains(this);
+        if (isSelected) {
+            if (selectMode == ONLY_ONE && selected.size() != 0) {
+                CartTileLongController selectedTile = selected.get(0);
+                selectedTile.forceDeselect();
             }
-        } else if (event.getClickCount() == 2) {
-            onDoubleClick.accept(book);
+            parentVBox.setStyle("-fx-border-color: black; -fx-background-color: lightcyan;");
+            selected.add(this);
+        } else {
+            parentVBox.setStyle("-fx-border-color: black; -fx-background-color: white;");
+            selected.remove(this);
+        }
+        if (onClick != null) {
+            var args = new ArrayList<>();
+            args.add(book);
+            args.add(isSelected);
+            Node[] nodes = {parentVBox, bookNameLabel, subjectCodeLabel, ISBNLabel, rentalInfoLabel};
+            args.add(nodes);
+            onClick.accept(args);
         }
     }
 
+    public static ArrayList<Book> getSelected() {
+        ArrayList<Book> books = new ArrayList<>();
+        for (CartTileLongController tile : selected) {
+            books.add(tile.book);
+        }
+        return books.size() == 0 ? null : books;
+    }
 
-    public void init(Book book, boolean selectable) {
+    public static void clearSelected() {
+        selected = new ArrayList<>();
+    }
+
+    public static void setSelectionMode(boolean selectMode) {
+        CartTileLongController.selectMode = selectMode;
+    }
+
+    /*
+    init(): Initialises this tile.
+    Book: Book object this tile represents.
+    onlyOne: enables only one to be selected (default: false)
+    onClick: Function that is called when this object is clicked.
+    Should have an ArrayList<Object> as input.
+    Passes internal book object, boolean isSelected, and all nodes to Consumer.
+    By default, this function turns this tile blue when selected and white when not.
+    */
+    public void init(Book book, Consumer<ArrayList<Object>> onClick) {
+        this.onClick = onClick;
         this.book = book;
-        this.selectable = selectable;
         bookNameLabel.setText(book.getTitle());
         subjectCodeLabel.setText(book.getSubjectCode());
         ISBNLabel.setText("ISBN " + Interface.convertISBN(book.getISBN()));
@@ -63,12 +101,12 @@ public class CartTileLongController {
         selected = new ArrayList<>();
     }
 
-    public static ArrayList<Book> getSelected() {
-        return selected;
+    public void init(Book book) {
+        init(book, null);
     }
 
-    public void init(Book book, boolean selectable, Consumer<Book> onDoubleClick) {
-        this.onDoubleClick = onDoubleClick;
-        init(book, selectable);
+    private void forceDeselect() {
+        selected.remove(this);
+        parentVBox.setStyle("-fx-border-color: black; -fx-background-color: white;");
     }
 }

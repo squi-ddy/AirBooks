@@ -6,7 +6,7 @@
 <VBox stylesheets="@../css/style.css" alignment="CENTER" onMouseClicked="#selectAction" prefHeight="50.0"
       prefWidth="900.0" style="-fx-border-color: black; -fx-background-color: white;"
       xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="airbooks.controller.CartTileLongController">
+      fx:controller="airbooks.controller.CartTileLongController" fx:id="parentVBox">
    <Label fx:id="bookNameLabel" alignment="CENTER" text="Book1">
       <VBox.margin>
          <Insets bottom="2.0" left="3.0" right="3.0"/>
