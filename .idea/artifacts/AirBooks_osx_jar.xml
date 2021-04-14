@@ -1,0 +1,29 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AirBooks-osx:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/jar</output-path>
+    <root id="archive" name="AirBooks-osx.jar">
+      <element id="module-output" name="PAPart3" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx-swt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx.base.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx.controls.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx.fxml.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx.graphics.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx.media.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx.swing.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx.web.jar" path-in-jar="/" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-macos/lib/libdecora_sse.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-macos/lib/libfxplugins.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-macos/lib/libglass.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-macos/lib/libglib-lite.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-macos/lib/libgstreamer-lite.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-macos/lib/libjavafx_font.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-macos/lib/libjavafx_iio.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-macos/lib/libjfxmedia.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-macos/lib/libjfxmedia_avf.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-macos/lib/libjfxwebkit.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-macos/lib/libprism_common.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-macos/lib/libprism_es2.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-macos/lib/libprism_sw.dylib" />
+    </root>
+  </artifact>
+</component>

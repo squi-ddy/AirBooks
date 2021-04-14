@@ -1,0 +1,37 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AirBooks-linux:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/jar</output-path>
+    <root id="archive" name="AirBooks-linux.jar">
+      <element id="module-output" name="PAPart3" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx-swt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx.base.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx.controls.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx.fxml.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx.graphics.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx.media.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx.swing.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx.web.jar" path-in-jar="/" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libavplugin-54.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libavplugin-56.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libavplugin-57.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libavplugin-ffmpeg-56.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libavplugin-ffmpeg-57.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libavplugin-ffmpeg-58.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libdecora_sse.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libfxplugins.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libglass.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libglassgtk2.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libglassgtk3.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libgstreamer-lite.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libjavafx_font.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libjavafx_font_freetype.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libjavafx_font_pango.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libjavafx_iio.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libjfxmedia.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libjfxwebkit.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libprism_common.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libprism_es2.so" />
+      <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/libprism_sw.so" />
+    </root>
+  </artifact>
+</component>
