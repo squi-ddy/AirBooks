@@ -1,14 +1,14 @@
 <component name="libraryTable">
   <library name="javafx-swt">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx-swt.jar!/" />
-      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx.base.jar!/" />
-      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx.controls.jar!/" />
-      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx.fxml.jar!/" />
-      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx.graphics.jar!/" />
-      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx.media.jar!/" />
-      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx.swing.jar!/" />
-      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx.web.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-16/not lib files/javafx-swt.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-16/not lib files/javafx.base.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-16/not lib files/javafx.controls.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-16/not lib files/javafx.fxml.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-16/not lib files/javafx.graphics.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-16/not lib files/javafx.media.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-16/not lib files/javafx.swing.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-16/not lib files/javafx.web.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
