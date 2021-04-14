@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 <VBox fx:id="SCSVBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
       minWidth="-Infinity" onMouseClicked="#selectAction" prefHeight="50.0" prefWidth="500.0"
-      style="-fx-background-color: white; -fx-border-color: black;" stylesheets="@../css/style.css"
+      style="-fx-background-color: white; -fx-border-color: black;" stylesheets="@style.css"
       xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="airbooks.controller.SCSTileController">
    <Label fx:id="scsNameLabel" text="NUS UTown">

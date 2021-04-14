@@ -6,9 +6,17 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class Interface {
-    private static final Security sec = new Security("src/airbooks/csv/Secure.csv");
-    private static final Database db = new Database("src/airbooks/csv/Student.csv", "src/airbooks/csv/Books.csv",
-            "src/airbooks/csv/SelfCollectStn.csv", "src/airbooks/csv/DistrictAreas.csv");
+    private static final String csvDirectory = "src/airbooks/resources/csv/";
+    private static final Security sec = new Security(
+            csvDirectory + "Secure.csv"
+    );
+    private static final Database db = new Database(
+            csvDirectory + "Student.csv",
+            csvDirectory + "Books.csv",
+            csvDirectory + "SelfCollectStn.csv",
+            csvDirectory + "DistrictAreas.csv"
+    );
+    private static final String transactionFile = csvDirectory + "Transaction.csv";
     private static final ArrayList<Book> rentalCart = new ArrayList<>();
 
     public static int login(String username, String password) {
@@ -28,14 +36,14 @@ public class Interface {
 
     public static String convertISBN(String ISBN) {
         int[] spacings = {3, 2, 5, 2, 1};
-        String result = "";
+        StringBuilder result = new StringBuilder();
         int counter = 0;
         for (int spacing : spacings) {
             for (int j = 0; j < spacing; j++) {
-                result += ISBN.charAt(counter) + "";
+                result.append(ISBN.charAt(counter));
                 counter++;
             }
-            result += "-";
+            result.append("-");
         }
         return result.substring(0, result.length() - 1);
     }
@@ -83,13 +91,13 @@ public class Interface {
         }
         getCurrentAccount().deductFromWallet(getCartSum());
         rentalCart.clear();
-        db.writeBook("src/airbooks/csv/Books.csv");
-        sec.writeAccount("src/airbooks/csv/Secure.csv");
+        db.writeBook(csvDirectory + "Books.csv");
+        sec.writeAccount(csvDirectory + "Secure.csv");
     }
 
     public static void transact(Book b, String postal, int lockerNo) {
         try {
-            PrintWriter out = new PrintWriter(new FileOutputStream("src/airbooks/csv/Transaction.csv", true));
+            PrintWriter out = new PrintWriter(new FileOutputStream(transactionFile, true));
             out.printf("%s,%s,%s,%s,%s,%s%n", b.getISBN(), Security.getCurrStudentLogin(), b.getRentalPeriod(),
                     b.getRentalDate(), postal, lockerNo);
             out.close();
@@ -107,8 +115,8 @@ public class Interface {
         acc.returnBook(book);
         String result = acc.addToWallet(book.getDeposit());
         if (result.matches("Unable.+")) return false;
-        db.writeBook("src/airbooks/csv/Books.csv");
-        sec.writeAccount("src/airbooks/csv/Secure.csv");
+        db.writeBook(csvDirectory + "Books.csv");
+        sec.writeAccount(csvDirectory + "Secure.csv");
         return true;
     }
 

@@ -7,14 +7,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airbooks.controller.ConfirmLockerController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airbooks.controller.ConfirmLockerController">
     <top>
         <ImageView fitHeight="153.0" fitWidth="261.0" pickOnBounds="true" preserveRatio="true"
                    BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets bottom="5.0" top="5.0"/>
             </BorderPane.margin>
-            <Image url="@airbooks-logo.png"/>
+            <Image url="@../resources/img/airbooks-logo.png"/>
         </ImageView>
     </top>
     <center>

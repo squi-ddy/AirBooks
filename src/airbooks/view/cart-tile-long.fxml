@@ -3,7 +3,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
-<VBox stylesheets="@../css/style.css" alignment="CENTER" onMouseClicked="#selectAction" prefHeight="50.0"
+<VBox stylesheets="@style.css" alignment="CENTER" onMouseClicked="#selectAction" prefHeight="50.0"
       prefWidth="900.0" style="-fx-border-color: black; -fx-background-color: white;"
       xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="airbooks.controller.CartTileLongController" fx:id="parentVBox">

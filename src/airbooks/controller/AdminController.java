@@ -49,7 +49,7 @@ public class AdminController implements Initializable  {
 
     @FXML
     private void aboutAction(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/fxml/about.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/view/about.fxml")));
         Stage window = new Stage();
         window.setScene(new Scene(root));
         window.setTitle("About");
@@ -64,7 +64,7 @@ public class AdminController implements Initializable  {
         if (selected != null) {
             boolean status = Interface.returnBook(selected.get(0).getBook());
             if (!status) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/error.fxml"));
                 Parent root = loader.load();
                 loader.<ErrorController>getController().init("Cannot return book!", "Returning this book would exceed the $25.00 limit.");
                 Stage err = new Stage();
@@ -135,7 +135,7 @@ public class AdminController implements Initializable  {
         try {
             // Caching to ensure fast searching times (FXML loading is slow)
             for (Book book : Interface.getBooks()) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/cart-tile-long.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/cart-tile-long.fxml"));
                 VBox root = loader.load();
                 loader.<CartTileLongController>getController().init(book, this::onClick);
                 VBox.setMargin(root, new Insets(0, 0, 1, 0));

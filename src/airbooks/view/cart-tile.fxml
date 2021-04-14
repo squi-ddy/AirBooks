@@ -5,7 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<AnchorPane stylesheets="@../css/style.css" prefHeight="50.0" prefWidth="300.0"
+<AnchorPane stylesheets="@style.css" prefHeight="50.0" prefWidth="300.0"
             style="-fx-border-color: black; -fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="airbooks.controller.CartTileController"
             fx:id="cartTileAP">
@@ -24,6 +24,6 @@
    <ImageView fitHeight="40.0" fitWidth="200.0" onMouseClicked="#trashAction" pickOnBounds="true"
               preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0"
               AnchorPane.topAnchor="5.0">
-      <Image url="@delete.png"/>
+      <Image url="@../resources/img/delete.png"/>
    </ImageView>
 </AnchorPane>

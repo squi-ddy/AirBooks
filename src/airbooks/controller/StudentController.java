@@ -49,7 +49,7 @@ public class StudentController implements Initializable {
     @FXML
     private void checkoutAction() throws IOException {
         if (Interface.getCartSum() > Interface.getCurrentAccount().getWallet()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/error.fxml"));
             Parent root = loader.load();
             loader.<ErrorController>getController().init("Not enough money!", "Deposit for books in rental cart cannot be paid.");
             Stage err = new Stage();
@@ -59,7 +59,7 @@ public class StudentController implements Initializable {
             err.initOwner(subjCB.getScene().getWindow());
             err.showAndWait();
         } else if (Interface.getCart().size() == 0) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/error.fxml"));
             Parent root = loader.load();
             loader.<ErrorController>getController().init("Nothing in cart!", "Rental cart is empty.");
             Stage err = new Stage();
@@ -69,7 +69,7 @@ public class StudentController implements Initializable {
             err.initOwner(subjCB.getScene().getWindow());
             err.showAndWait();
         } else {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/fxml/checkout.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/view/checkout.fxml")));
             Stage main = new Stage();
             main.setScene(new Scene(root));
             main.setTitle("Checkout");
@@ -86,7 +86,7 @@ public class StudentController implements Initializable {
         String subject = subjCB.getValue();
         var books = Interface.getBooksBySubjectCode(subject);
         for (Book book : books) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/cart-tile-long.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/cart-tile-long.fxml"));
             VBox root = loader.load();
             var controller = loader.<CartTileLongController>getController();
             controller.init(book);
@@ -107,7 +107,7 @@ public class StudentController implements Initializable {
         for (CartTileLongController controller : selected) {
             Book book = controller.getBook();
             Interface.getCart().add(book);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/cart-tile.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/cart-tile.fxml"));
             AnchorPane root = loader.load();
             loader.<CartTileController>getController().init(book, this::onTrash);
             VBox.setMargin(root, new Insets(0, 0, 1, 0));
@@ -120,7 +120,7 @@ public class StudentController implements Initializable {
 
     @FXML
     private void collectLockerAction() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/fxml/collect-book.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/view/collect-book.fxml")));
         Stage main = new Stage();
         main.setScene(new Scene(root));
         main.setTitle("Collect from Locker");
@@ -132,7 +132,7 @@ public class StudentController implements Initializable {
 
     @FXML
     private void aboutAction(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/fxml/about.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/view/about.fxml")));
         Stage window = new Stage();
         window.setScene(new Scene(root));
         window.setTitle("About");
@@ -148,7 +148,7 @@ public class StudentController implements Initializable {
         rentBooksVBox.getChildren().clear();
         var books = Interface.getCart();
         for (Book book : books) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/cart-tile.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/cart-tile.fxml"));
             AnchorPane root = loader.load();
             loader.<CartTileController>getController().init(book, this::onTrash);
             VBox.setMargin(root, new Insets(0, 0, 1, 0));
@@ -156,7 +156,7 @@ public class StudentController implements Initializable {
         }
         var searchedBooks = Interface.getBooksBySubjectCode(subjCB.getValue());
         for (Book book : searchedBooks) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/cart-tile-long.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/cart-tile-long.fxml"));
             VBox root = loader.load();
             var controller = loader.<CartTileLongController>getController();
             controller.init(book);
