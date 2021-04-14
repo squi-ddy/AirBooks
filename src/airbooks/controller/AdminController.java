@@ -60,9 +60,9 @@ public class AdminController implements Initializable  {
 
     @FXML
     private void returnBookAction() throws IOException {
-        ArrayList<Book> selected = CartTileLongController.getSelected();
+        ArrayList<CartTileLongController> selected = CartTileLongController.getSelected();
         if (selected != null) {
-            boolean status = Interface.returnBook(selected.get(0));
+            boolean status = Interface.returnBook(selected.get(0).getBook());
             if (!status) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
                 Parent root = loader.load();
@@ -74,6 +74,8 @@ public class AdminController implements Initializable  {
                 err.initOwner(accName.getScene().getWindow());
                 err.showAndWait();
             } else {
+                // because we are using the same object, we must force reload it
+                selected.get(0).reload();
                 reload();
             }
         }
@@ -90,8 +92,8 @@ public class AdminController implements Initializable  {
     }
 
     private void reloadReturnButton() {
-        ArrayList<Book> selected = CartTileLongController.getSelected();
-        returnBookButton.setVisible(selected != null && selected.get(0).getIsRented());
+        ArrayList<CartTileLongController> selected = CartTileLongController.getSelected();
+        returnBookButton.setVisible(selected != null && selected.get(0).getBook().getIsRented());
     }
 
     private void reloadSearchResults() {
@@ -108,7 +110,7 @@ public class AdminController implements Initializable  {
             }
         }
         bookViewVBox.getChildren().clear();
-        if (CartTileLongController.getSelected() != null) CartTileLongController.clearSelected();
+        if (CartTileLongController.getSelected() != null) CartTileLongController.getSelected().clear();
         for (Book book : books) {
             // Get and show the cached book tile
             VBox root = cartTileLongPreloaded.get(book);

@@ -4,83 +4,72 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Locker {
-    // Attributes
-    private final int lockerNum;
+    private int lockerNum;
     private String lockerPassword;
     private String studentID;
     private ArrayList<Book> booklist;
-
-    // Constructors
-    public Locker(int lockerNum) {
-        if (lockerNum < 0) {
-            throw new IllegalArgumentException("Cannot create Locker! Invalid locker number!");
-        }
-        this.lockerNum = lockerNum;
+    
+    public Locker(int lockerNum){
+        if (lockerNum < 0) throw new IllegalArgumentException("Cannot create Locker! Invalid locker number!");
+        else this.lockerNum = lockerNum;
         this.lockerPassword = "NUSHabAdmin";
         this.studentID = "h2100000";
-        this.booklist = new ArrayList<>();
+        this.booklist = new ArrayList<Book>();
     }
 
-    // Accessors
-    public int getLockerNum() {
-        return lockerNum;
-    }
-
-    public String getStudentID() {
-        return studentID;
-    }
+    public int getLockerNum(){return lockerNum;}
+    public String getStudentID(){return studentID;}
 
     public ArrayList<Book> getBookList() {
-        ArrayList<Book> deepCopy = new ArrayList<>();
-        for (Book b : booklist) {
-            deepCopy.add(new Book(b));
+        ArrayList<Book> temp = new ArrayList<Book>();
+        for (Book b : booklist){
+            temp.add(new Book(b));
         }
-        return deepCopy;
+        return temp;
     }
 
-    // Methods
-    public boolean isEmpty() {
-        return booklist.isEmpty();
+    public boolean isEmpty(){
+        if(booklist.isEmpty()) return true;
+        else return false;
     }
 
-    public String placeItem(String studentID, ArrayList<Book> booklist) {
-        if (!Student.checkStudentID(studentID)) {
+    public String placeItem(String studentID, ArrayList<Book> booklist){
+        lockerPassword = "";
+        Random rand = new Random();
+        for (int i = 0; i < 8; i++){
+            lockerPassword += (char)(rand.nextInt(58)+33);
+        }
+        if (Student.checkStudentID(studentID))
+            this.studentID = studentID;
+        else
             throw new IllegalArgumentException("Invalid Student ID.");
-        }
-        this.studentID = studentID;
-        String password = "";
-        Random generator = new Random();
-        for (int i = 0; i < 8; i++) {
-            password += (char)(generator.nextInt(58) + 33);
-        }
-        this.lockerPassword = password;
         this.booklist = booklist;
-        return password;
+        return lockerPassword;
     }
 
-    public String unlockLocker(String password) {
-        if (isEmpty()) {
+    public String unlockLocker(String password){
+        if (this.isEmpty())
             return "The locker is empty.";
-        }
         if (password.equals(lockerPassword)) {
-            String returnString = "Thank you for using AirBooks! Please collect your items:\n";
-            for (Book b : booklist) {
-                returnString += b;
-                returnString += '\n';
-            }
             this.lockerPassword = "NUSHabAdmin";
-            this.studentID = "h2100000";
-            this.booklist = new ArrayList<>();
-            return returnString;
+            this.studentID = "";
+            ArrayList<Book> templist = this.getBookList();
+            booklist.clear();
+            String rtrn = "Thank you for using AirBooks! Please collect your items:\n";
+            for (Book b : templist){
+                rtrn += b+"\n";
+            }
+            return rtrn;
         }
-        return "Please ensure you keyed in the correct password.";
+        else
+            return "Please ensure you keyed in the correct password.";
     }
 
     @Override
     public String toString(){
-        if (isEmpty()) {
+        if (this.isEmpty())
             return "Locker is empty";
-        } else {
+        else {
             return "Locker " + lockerNum + "; Password: " + lockerPassword + "\nPending collection by: " + studentID;
         }
     }

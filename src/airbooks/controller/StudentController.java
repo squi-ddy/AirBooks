@@ -102,9 +102,10 @@ public class StudentController implements Initializable {
 
     @FXML
     private void cartAction() throws IOException {
-        ArrayList<Book> selected = CartTileLongController.getSelected();
+        ArrayList<CartTileLongController> selected = CartTileLongController.getSelected();
         if (selected == null) return;
-        for (Book book : selected) {
+        for (CartTileLongController controller : selected) {
+            Book book = controller.getBook();
             Interface.getCart().add(book);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/cart-tile.fxml"));
             AnchorPane root = loader.load();

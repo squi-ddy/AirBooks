@@ -39,7 +39,9 @@ public class Student {
         for (int i = 0; i < 8; i++){
             if (!Character.isDigit(handphoneNo.charAt(i))) return false;
         }
-        return handphoneNo.charAt(0) == '8' || handphoneNo.charAt(0) == '9';
+        if (!(handphoneNo.charAt(0) == '8' || handphoneNo.charAt(0) == '9')) return false;
+
+        return true;
     }
 
     public String getName() {

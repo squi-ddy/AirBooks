@@ -59,16 +59,12 @@ public class CartTileLongController {
         }
     }
 
-    public static ArrayList<Book> getSelected() {
-        ArrayList<Book> books = new ArrayList<>();
-        for (CartTileLongController tile : selected) {
-            books.add(tile.book);
-        }
-        return books.size() == 0 ? null : books;
+    public static ArrayList<CartTileLongController> getSelected() {
+        return selected.size() == 0 ? null : selected;
     }
 
-    public static void clearSelected() {
-        selected = new ArrayList<>();
+    public Book getBook() {
+        return book;
     }
 
     public static void setSelectionMode(boolean selectMode) {
@@ -103,6 +99,18 @@ public class CartTileLongController {
 
     public void init(Book book) {
         init(book, null);
+    }
+
+    public void reload() {
+        // Reloads book information (mostly rented info)
+        if (book.getIsRented()) {
+            Student student = Interface.getStudentById(book.getStudentID());
+            rentalInfoLabel.setText(String.format("Rented - %s", student == null ? book.getStudentID() : (student.getName() + " (" + student.getStudentID() + ")")));
+            rentalInfoLabel.setTextFill(Color.web("#CD5C5C"));
+        } else {
+            rentalInfoLabel.setText(String.format("Available - $%.2f, %d days", book.getDeposit(), book.getRentalPeriod()));
+            rentalInfoLabel.setTextFill(Color.web("#3CB371"));
+        }
     }
 
     private void forceDeselect() {

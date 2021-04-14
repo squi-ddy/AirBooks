@@ -2,202 +2,191 @@ package airbooks.model;
 
 import java.io.*;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
 
 public class Database {
-    // Attributes
     private ArrayList<Student> studentDB;
     private ArrayList<Book> booksDB;
     private ArrayList<SelfCollectStn> selfcollectDB;
     private ArrayList<String> districtAreas;
 
-    // Constructors
-    public Database(String studentFile, String booksFile, String selfCollectFile, String districtFile) {
+    public Database(String studentFile, String booksFile, String selfCollectFile, String districtFile){
+        studentDB = new ArrayList<Student>();
         loadStudentDB(studentFile);
+        booksDB = new ArrayList<Book>();
         loadBookDB(booksFile);
+        selfcollectDB = new ArrayList<SelfCollectStn>();
         loadSelfCollectDB(selfCollectFile);
+        districtAreas = new ArrayList<String>();
         loadDistrictAreas(districtFile);
     }
 
-    // Methods
-    public void loadStudentDB(String filename) {
-        studentDB = new ArrayList<>();
-        try {
-            BufferedReader csv = new BufferedReader(new FileReader(filename));
+    public void loadStudentDB(String filename){
+        BufferedReader br = null;
+        try{
             String line;
-            while ((line = csv.readLine()) != null) {
-                String[] attributes = line.split(",");
-                studentDB.add(new Student(attributes[0], attributes[1], attributes[2]));
+            br = new BufferedReader(new FileReader(filename));
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                studentDB.add(new Student(data[0], data[1], data[2]));
             }
-            csv.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            br.close();
+        }catch (IOException e) { e.printStackTrace();
+        }finally{ try { br.close(); } catch (Exception e) { e.printStackTrace(); }
+        }
+    }
+    public void loadBookDB(String filename){
+        BufferedReader br = null;
+        try{
+            String line;
+            br = new BufferedReader(new FileReader(filename));
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                try {
+                    if (data.length == 6)
+                        booksDB.add(new Book(data[0], data[1], data[2], data[3], Double.parseDouble(data[4]), Integer.parseInt(data[5])));
+                    else
+                        booksDB.add(new Book(data[0], data[1], data[2], data[3], Double.parseDouble(data[4]), Integer.parseInt(data[5]),
+                                data[6], data[7]));
+                } catch(ParseException e){e.printStackTrace();}
+            }
+            br.close();
+        }catch (IOException e) { e.printStackTrace();
+        }finally{ try { br.close(); } catch (Exception e) { e.printStackTrace(); }
+        }
+    }
+    public void loadSelfCollectDB(String filename){
+        BufferedReader br = null;
+        try{
+            String line;
+            br = new BufferedReader(new FileReader(filename));
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                selfcollectDB.add(new SelfCollectStn(data[0], data[1], Integer.parseInt(data[2])));
+            }
+            br.close();
+        }catch (IOException e) { e.printStackTrace();
+        }finally{ try { br.close(); } catch (Exception e) { e.printStackTrace(); }
+        }
+    }
+    public void loadDistrictAreas(String filename){
+        BufferedReader br = null;
+        try{
+            String line;
+            br = new BufferedReader(new FileReader(filename));
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                districtAreas.add(data[0]);
+            }
+            br.close();
+        }catch (IOException e) { e.printStackTrace();
+        }finally{ try { br.close(); } catch (Exception e) { e.printStackTrace(); }
         }
     }
 
-    public void loadBookDB(String filename) {
-        booksDB = new ArrayList<>();
-        try {
-            BufferedReader csv = new BufferedReader(new FileReader(filename));
-            String line;
-            while ((line = csv.readLine()) != null) {
-                String[] attributes = line.split(",");
-                if (attributes.length == 6) {
-                    booksDB.add(new Book(attributes[0], attributes[1], attributes[2], attributes[3],
-                            Double.parseDouble(attributes[4]), Integer.parseInt(attributes[5])));
-                } else {
-                    booksDB.add(new Book(attributes[0], attributes[1], attributes[2], attributes[3],
-                            Double.parseDouble(attributes[4]), Integer.parseInt(attributes[5]),
-                            attributes[6], attributes[7]));
-                }
-            }
-            csv.close();
-        } catch (IOException | NumberFormatException | ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void loadSelfCollectDB(String filename) {
-        selfcollectDB = new ArrayList<>();
-        try {
-            BufferedReader csv = new BufferedReader(new FileReader(filename));
-            String line;
-            while ((line = csv.readLine()) != null) {
-                String[] attributes = line.split(",");
-                selfcollectDB.add(new SelfCollectStn(attributes[0], attributes[1], Integer.parseInt(attributes[2])));
-            }
-            csv.close();
-        } catch (IOException | NumberFormatException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void loadDistrictAreas(String filename) {
-        districtAreas = new ArrayList<>();
-        try {
-            BufferedReader csv = new BufferedReader(new FileReader(filename));
-            String line;
-            while ((line = csv.readLine()) != null) {
-                String[] attributes = line.split(",");
-                districtAreas.add(attributes[0]);
-            }
-            csv.close();
-            Collections.sort(districtAreas);
-        } catch (IOException | NumberFormatException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Student getStudent(String studentID) {
-        if (!Student.checkStudentID(studentID)) {
-            throw new IllegalArgumentException("Invalid Student ID!");
-        }
+    public Student getStudent(String studentID){
+        if (!Student.checkStudentID(studentID)) throw new IllegalArgumentException("Invalid Student ID!");
         for (Student s : studentDB) {
-            if (s.getStudentID().equals(studentID)) {
+            if (s.getStudentID().equals(studentID))
                 return s;
-            }
         }
         return null;
     }
 
-    public Book getBook(String ISBN) {
-        if (!Book.checkISBN(ISBN)) {
-            throw new IllegalArgumentException("Invalid ISBN!");
-        }
+    public Book getBook(String ISBN){
+        if (!Book.checkISBN(ISBN)) throw new IllegalArgumentException("Invalid ISBN!");
         for (Book b : booksDB) {
-            if (b.getISBN().equals(ISBN)) {
+            if (b.getISBN().equals(ISBN))
                 return b;
-            }
         }
         return null;
-    }
-
-    public ArrayList<String> getPossibleSubjCodes() {
-        ArrayList<String> subjects = new ArrayList<>();
-        for (Book b : booksDB) {
-            if (!subjects.contains(b.getSubjectCode())) {
-                subjects.add(b.getSubjectCode());
-            }
-        }
-        Collections.sort(subjects);
-        return subjects;
-    }
-
-    public ArrayList<Book> getBooklistBySubjCode(String subjCode, ArrayList<Book> rentalCart) {
-        // Logically, books that have the same ISBN should be the same book
-        // Thus the definition for same books will be if the ISBN is equal
-        ArrayList<String> rentalISBN = new ArrayList<>();
-        for (Book b : rentalCart) {
-            rentalISBN.add(b.getISBN());
-        }
-        ArrayList<Book> booklist = new ArrayList<>();
-        for (Book b : booksDB) {
-            if (b.getSubjectCode().equals(subjCode) && !b.getIsRented() && !rentalISBN.contains(b.getISBN())) {
-                booklist.add(b);
-            }
-        }
-        return booklist;
-    }
-
-    public SelfCollectStn getSelfCollection(String postal) {
-        for (SelfCollectStn scs : selfcollectDB) {
-            if (scs.getPostalCode().equals(postal)) {
-                return scs;
-            }
-        }
-        return null;
-    }
-
-    public ArrayList<SelfCollectStn> getNearbySelfCollection(String postal) {
-        if (postal.length() != 6) {
-            return null;
-        }
-        try {
-            Integer.parseInt(postal);
-        } catch (NumberFormatException e) {
-            return null;
-        }
-        String districtArea = postal.substring(0, 2);
-        String[] validDistrictAreas = {};
-        for (String district : districtAreas) {
-            if (district.contains(districtArea)) {
-                validDistrictAreas = district.split("-");
-                break;
-            }
-        }
-        ArrayList<SelfCollectStn> results = new ArrayList<>();
-        for (SelfCollectStn scs : selfcollectDB) {
-            for (String validDistrictArea : validDistrictAreas) {
-                if (scs.getPostalCode().substring(0, 2).equals(validDistrictArea)) {
-                    results.add(scs);
-                    break;
-                }
-            }
-        }
-        return results;
-    }
-
-    public void writeBook(String filename) {
-        try {
-            PrintWriter out = new PrintWriter(new FileWriter(filename));
-            for (Book b : booksDB) {
-                if (b.getIsRented()) {
-                    out.println(b.getISBN() + "," + b.getTitle() + "," + b.getAuthor() + "," + b.getSubjectCode() +
-                            "," + b.getDeposit() + "," + b.getRentalPeriod() + "," + b.getStudentID() + "," +
-                            b.getRentalDate());
-                } else {
-                    out.println(b.getISBN() + "," + b.getTitle() + "," + b.getAuthor() + "," + b.getSubjectCode() +
-                            "," + b.getDeposit() + "," + b.getRentalPeriod());
-                }
-            }
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public ArrayList<Book> getBooksDB() {
         return booksDB;
+    }
+
+    public ArrayList<String> getPossibleSubjCodes(){
+        ArrayList<String> subjCodes = new ArrayList<>();
+        for (Book b: booksDB){
+            if (!subjCodes.contains(b.getSubjectCode()))
+                subjCodes.add(b.getSubjectCode());
+        }
+        Collections.sort(subjCodes);
+        return subjCodes;
+    }
+    public ArrayList<Book> getBooklistBySubjCode(String subjCode, ArrayList<Book> rentalCart){
+        ArrayList<Book> temp = new ArrayList<Book>();
+        boolean inRental;
+        for (Book b : booksDB) {
+            inRental = false;
+            if (b.getSubjectCode().equals(subjCode) && !b.getIsRented()){
+                for (Book ex : rentalCart){
+                    if (ex.getISBN().equals(b.getISBN()))
+                        inRental = true;
+                }
+                if (!inRental) temp.add(b);
+            }
+        }
+        return temp;
+    }
+
+    public SelfCollectStn getSelfCollection(String postal){
+        for (SelfCollectStn s: selfcollectDB){
+            if (s.getPostalCode().equals(postal))
+                return s;
+        }
+        return null;
+    }
+
+    public ArrayList<SelfCollectStn> getNearbySelfCollection(String postal){
+        if (!postal.matches("\\d{6}")) return null;
+        String area = postal.substring(0,2);
+        ArrayList<String> nearbyDist;
+        ArrayList<SelfCollectStn> stations = new ArrayList<SelfCollectStn>();
+        for (String s : districtAreas){
+            nearbyDist = new ArrayList<String>(Arrays.asList(s.split("-")));
+            if (nearbyDist.contains(area)) {
+                for (String nD : nearbyDist){
+                    for (SelfCollectStn sc : selfcollectDB) {
+                        if (sc.getPostalCode().substring(0, 2).equals(nD)) stations.add(sc);
+                    }
+                }
+            }
+        }
+        return stations;
+    }
+
+    public void writeBook(String filename){
+        int item = 1;
+        try{
+            PrintWriter output = new PrintWriter(new FileOutputStream(filename));
+
+            for (Book b: booksDB){
+                if (!b.getIsRented()){
+                    output.println(b.getISBN()+","
+                            + b.getTitle() + ","
+                            + b.getAuthor() + ","
+                            + b.getSubjectCode() + ","
+                            + b.getDeposit() + ","
+                            + b.getRentalPeriod());
+                }
+                else{
+                    output.println(b.getISBN() + ","
+                            + b.getTitle() + ","
+                            + b.getAuthor() + ","
+                            + b.getSubjectCode() + ","
+                            + b.getDeposit() + ","
+                            + b.getRentalPeriod() + ","
+                            + b.getStudentID() + ","
+                            + b.getRentalDate());
+                }
+                item++;
+            }
+            output.close();
+        } catch(Exception e){System.out.println("Error at record: " + item); }
     }
 }
