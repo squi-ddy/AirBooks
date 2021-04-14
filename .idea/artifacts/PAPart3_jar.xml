@@ -1,0 +1,50 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PAPart3:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PAPart3_jar</output-path>
+    <root id="archive" name="PAPart3.jar">
+      <element id="module-output" name="PAPart3" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx-swt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx.base.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx.controls.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx.fxml.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx.graphics.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx.media.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx.swing.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/javafx.web.jar" path-in-jar="/" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libavplugin-54.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libavplugin-56.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libavplugin-57.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libavplugin-ffmpeg-56.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libavplugin-ffmpeg-57.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libavplugin-ffmpeg-58.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libdecora_sse.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libfxplugins.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libglass.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libglassgtk2.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libglassgtk3.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libgstreamer-lite.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libjavafx_font.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libjavafx_font_freetype.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libjavafx_font_pango.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libjavafx_iio.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libjfxmedia.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libjfxwebkit.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libprism_common.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libprism_es2.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libprism_sw.so" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libdecora_sse.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libfxplugins.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libglass.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libglib-lite.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libgstreamer-lite.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libjavafx_font.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libjavafx_iio.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libjfxmedia.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libjfxmedia_avf.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libjfxwebkit.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libprism_common.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libprism_es2.dylib" />
+      <element id="file-copy" path="$USER_HOME$/Downloads/javafx-sdk-16/lib/libprism_sw.dylib" />
+    </root>
+  </artifact>
+</component>

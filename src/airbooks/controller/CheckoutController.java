@@ -39,7 +39,7 @@ public class CheckoutController {
             SCSListVBox.getChildren().add(resLabel);
         } else {
             for (SelfCollectStn scs : possible) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/scs-tile.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/scs-tile.fxml"));
                 VBox root = loader.load();
                 var controller = loader.<SCSTileController>getController();
                 controller.init(scs);
@@ -54,7 +54,7 @@ public class CheckoutController {
     private void chooseSCSAction() throws IOException {
         SelfCollectStn scs = SCSTileController.getSelected();
         if (scs == null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/error.fxml"));
             Parent root = loader.load();
             loader.<ErrorController>getController().init("Invalid input!", "Please select a station.");
             Stage err = new Stage();
@@ -69,7 +69,7 @@ public class CheckoutController {
         Locker locker = scs.getLocker(lockerNum);
         String password = locker.placeItem(Interface.getCurrentStudent().getStudentID(), new ArrayList<>(Interface.getCart()));
         Interface.checkout(scs.getPostalCode(), lockerNum);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/confirm-rent.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/confirm-rent.fxml"));
         Parent root = loader.load();
         loader.<ConfirmRentController>getController().init(lockerNum, password, scs.getPostalCode());
         Stage stage = new Stage();
@@ -84,7 +84,7 @@ public class CheckoutController {
 
     @FXML
     private void aboutAction(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/fxml/about.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/view/about.fxml")));
         Stage window = new Stage();
         window.setScene(new Scene(root));
         window.setTitle("About");

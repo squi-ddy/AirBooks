@@ -25,7 +25,7 @@ public class LoginController {
 
     @FXML
     private void aboutAction(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/fxml/about.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/view/about.fxml")));
         Stage window = new Stage();
         window.setScene(new Scene(root));
         window.setTitle("About");
@@ -38,7 +38,7 @@ public class LoginController {
     private void loginAction() throws IOException {
         int status = Interface.login(usernameTF.getText().strip(), passwordTF.getText().strip());
         if (status == -1) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/fxml/error.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/error.fxml"));
             Parent root = loader.load();
             loader.<ErrorController>getController().init("Invalid input!", "Username or password is incorrect.");
             Stage err = new Stage();
@@ -49,7 +49,7 @@ public class LoginController {
             err.showAndWait();
         }
         else if (status == 0) {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/fxml/student.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/view/student.fxml")));
             Stage main = new Stage();
             main.setScene(new Scene(root));
             main.setTitle("Student View");
@@ -59,7 +59,7 @@ public class LoginController {
             loginStage.show();
         }
         else {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/fxml/admin.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/airbooks/view/admin.fxml")));
             Stage main = new Stage();
             main.setScene(new Scene(root));
             main.setTitle("Admin View");
