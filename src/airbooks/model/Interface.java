@@ -4,6 +4,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Interface {
     private static final String csvDirectory = "src/airbooks/resources/csv/";
@@ -120,14 +122,6 @@ public class Interface {
         return true;
     }
 
-    public static Book getBookByISBN(String ISBN) {
-        try {
-            return db.getBook(ISBN);
-        } catch (IllegalArgumentException e) {
-            return null;
-        }
-    }
-
     public static int collectFromLocker(String postal, String lockerNum, String password) {
         // 0 -> success, 1 -> invalid info, 2 -> not your locker
         try {
@@ -156,5 +150,14 @@ public class Interface {
         } catch (IllegalArgumentException e) {
             return null;
         }
+    }
+
+    public static String getAreaDetails(SelfCollectStn scs) {
+        Pattern regex = Pattern.compile("Self-Collection point at (.*) \\(\\Q" + scs.getPostalCode() + "\\E\\)");
+        Matcher match = regex.matcher(scs.toString());
+        if (!match.find()) {
+            return null;
+        }
+        return match.group(1);
     }
 }

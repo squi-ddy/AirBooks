@@ -101,9 +101,11 @@ public class AdminController implements Initializable  {
         int originalSize = books.size();
         if (!searchTF.getText().isBlank()) {
             String searchString = searchTF.getText().toLowerCase();
-            if (searchString.charAt(0) == '0') searchString = searchString.replaceAll("-", "");
+            if (Character.isDigit(searchString.charAt(0))) searchString = searchString.replaceAll("-", "");
             for (int i = 0; i < books.size(); i++) {
-                if (!(books.get(i).getISBN().matches(searchString + ".*") || books.get(i).getTitle().toLowerCase().matches(searchString + ".*"))) {
+                // \Q and \E sanitises the input for the regex
+                if (!(books.get(i).getISBN().matches("\\Q" + searchString + "\\E.*") ||
+                        books.get(i).getTitle().toLowerCase().matches("\\Q" + searchString + "\\E.*"))) {
                     books.remove(i);
                     i--;
                 }
@@ -118,9 +120,9 @@ public class AdminController implements Initializable  {
             bookViewVBox.getChildren().add(root);
         }
         if (!searchTF.getText().isBlank()) {
-            bookTotalLabel.setText(String.format("%d books in total (%d shown)", originalSize, books.size()));
+            bookTotalLabel.setText(String.format("%d/%d results", books.size(), originalSize));
         } else {
-            bookTotalLabel.setText(String.format("%d books in total", originalSize));
+            bookTotalLabel.setText(String.format("%d results", originalSize));
         }
     }
 

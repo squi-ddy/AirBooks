@@ -1,5 +1,6 @@
 package airbooks.controller;
 
+import airbooks.model.Interface;
 import airbooks.model.SelfCollectStn;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -37,7 +38,7 @@ public class SCSTileController {
     public void init(SelfCollectStn scs) {
         selected = null;
         SCSVBox.setUserData(scs);
-        scsNameLabel.setText(scs.getAreaDetails());
+        scsNameLabel.setText(Interface.getAreaDetails(scs));
         postalCodeLabel.setText(scs.getPostalCode());
     }
 

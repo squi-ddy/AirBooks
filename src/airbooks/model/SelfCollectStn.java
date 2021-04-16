@@ -22,11 +22,6 @@ public class SelfCollectStn {
     public String getPostalCode() {
         return postalCode;
     }
-
-    public String getAreaDetails() {
-        return areaDetails;
-    }
-
     public int getNumOfLockers() {
         return numOfLockers;
     }

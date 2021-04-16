@@ -104,11 +104,6 @@ public class Database {
         }
         return null;
     }
-
-    public ArrayList<Book> getBooksDB() {
-        return booksDB;
-    }
-
     public ArrayList<String> getPossibleSubjCodes(){
         ArrayList<String> subjCodes = new ArrayList<>();
         for (Book b: booksDB){
@@ -188,5 +183,9 @@ public class Database {
             }
             output.close();
         } catch(Exception e){System.out.println("Error at record: " + item); }
+    }
+
+    public ArrayList<Book> getBooksDB() {
+        return booksDB;
     }
 }
