@@ -119,11 +119,7 @@ public class AdminController implements Initializable  {
             root.setStyle("-fx-border-color: black; -fx-background-color: white;");
             bookViewVBox.getChildren().add(root);
         }
-        if (!searchTF.getText().isBlank()) {
-            bookTotalLabel.setText(String.format("%d/%d results", books.size(), originalSize));
-        } else {
-            bookTotalLabel.setText(String.format("%d results", originalSize));
-        }
+        bookTotalLabel.setText(String.format("%d/%d results", books.size(), originalSize));
     }
 
     private void onClick(ArrayList<Object> inputs) {
