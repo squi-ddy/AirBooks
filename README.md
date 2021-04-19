@@ -23,3 +23,8 @@ Online book rental has never been easier!
 
 ### Development stage
 All features complete. Currently, refinement of the UI and bug-fixing is in progress.
+
+### Todo
+- Change jar artifact output location
+- Change admin/student screen to 1280 x 720 (compatibility)
+- rename jarMain to JarMain
