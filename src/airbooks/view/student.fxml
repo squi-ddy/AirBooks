@@ -98,7 +98,7 @@
                      <Insets bottom="5.0" top="3.0" />
                   </VBox.margin>
                </ComboBox>
-               <ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="500.0" vbarPolicy="NEVER">
+               <ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="450.0" vbarPolicy="NEVER">
                   <VBox.margin>
                      <Insets top="10.0" />
                   </VBox.margin>

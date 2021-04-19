@@ -1,6 +1,7 @@
 package airbooks;
 
 import airbooks.controller.LoginController;
+import airbooks.model.Interface;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +12,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Interface.initialise();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/login.fxml"));
         Parent root = loader.load();
         loader.<LoginController>getController().init(primaryStage);

@@ -23,10 +23,3 @@ Online book rental has never been easier!
 
 ### Development stage
 All features complete. Currently, refinement of the UI and bug-fixing is in progress.
-
-### Todo
-- Change jar artifact output location
-- Rename jarMain to JarMain
-- Reset all controllers upon window exit (causes a buh with SCSController)
-- Split student controller reload function into 3 parts: info, rentalCart, search (rentalCart need not be reloaded upon trash)
-- Use Map optimisation in Main.java too

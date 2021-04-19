@@ -42,6 +42,10 @@ public class SCSTileController {
         postalCodeLabel.setText(scs.getPostalCode());
     }
 
+    public static void reset() {
+        selected = null;
+    }
+
     public static SelfCollectStn getSelected() {
         return selected;
     }

@@ -1,6 +1,6 @@
 package airbooks;
 
-public class jarMain {
+public class JarMain {
     public static void main(String[] args) {
         Main.main(null);
     }

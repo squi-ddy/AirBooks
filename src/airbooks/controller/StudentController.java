@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -45,6 +46,9 @@ public class StudentController implements Initializable {
         if (event.getButton() != MouseButton.PRIMARY) return;
         accNameLabel.getScene().getWindow().hide();
     }
+
+    private static final HashMap<Book, AnchorPane> cartTilePreloaded = new HashMap<>();
+    private static final HashMap<Book, VBox> cartTileLongPreloaded = new HashMap<>();
 
     @FXML
     private void checkoutAction() throws IOException {
@@ -142,31 +146,36 @@ public class StudentController implements Initializable {
     }
 
     private void reload() throws IOException {
+        reloadInfo();
+        reloadSearch();
+        reloadRentalCart();
+    }
+
+    private void reloadInfo() {
         walletLabel.setText(String.format("$%.2f", Interface.getCurrentAccount().getWallet()));
         cartInfoLabel.setText(String.format("%d books, $%.2f", Interface.getCart().size(), Interface.getCartSum()));
-        rentalCartVBox.getChildren().clear();
+    }
+
+    private void reloadSearch() {
         rentBooksVBox.getChildren().clear();
-        var books = Interface.getCart();
-        for (Book book : books) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/cart-tile.fxml"));
-            AnchorPane root = loader.load();
-            loader.<CartTileController>getController().init(book, this::onTrash);
-            VBox.setMargin(root, new Insets(0, 0, 1, 0));
-            rentalCartVBox.getChildren().add(root);
-        }
         var searchedBooks = Interface.getBooksBySubjectCode(subjCB.getValue());
         for (Book book : searchedBooks) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/cart-tile-long.fxml"));
-            VBox root = loader.load();
-            var controller = loader.<CartTileLongController>getController();
-            controller.init(book);
-            VBox.setMargin(root, new Insets(0, 0, 1, 0));
+            VBox root = cartTileLongPreloaded.get(book);
+            root.setStyle("-fx-border-color: black; -fx-background-color: white;");
             rentBooksVBox.getChildren().add(root);
         }
         if (searchedBooks.size() == 0) {
             var resLabel = new Label("No results!");
             VBox.setMargin(resLabel, new Insets(5, 0, 5, 0));
             rentBooksVBox.getChildren().add(resLabel);
+        }
+    }
+
+    private void reloadRentalCart() {
+        rentalCartVBox.getChildren().clear();
+        var books = Interface.getCart();
+        for (Book book : books) {
+            rentalCartVBox.getChildren().add(cartTilePreloaded.get(book));
         }
     }
 
@@ -180,11 +189,23 @@ public class StudentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        accNameLabel.setText(Interface.getCurrentStudent().getName());
+        subjCB.setItems(FXCollections.observableArrayList(Interface.getSubjectCodes()));
+        subjCB.getSelectionModel().select(0);
+        CartTileLongController.setSelectionMode(CartTileLongController.MULTIPLE);
         try {
-            accNameLabel.setText(Interface.getCurrentStudent().getName());
-            subjCB.setItems(FXCollections.observableArrayList(Interface.getSubjectCodes()));
-            subjCB.getSelectionModel().select(0);
-            CartTileLongController.setSelectionMode(CartTileLongController.MULTIPLE);
+            for (Book book : Interface.getBooks()) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/cart-tile-long.fxml"));
+                VBox root = loader.load();
+                loader.<CartTileLongController>getController().init(book);
+                VBox.setMargin(root, new Insets(0, 0, 1, 0));
+                cartTileLongPreloaded.put(book, root);
+                FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/airbooks/view/cart-tile.fxml"));
+                AnchorPane root2 = loader2.load();
+                loader2.<CartTileController>getController().init(book, this::onTrash);
+                VBox.setMargin(root2, new Insets(0, 0, 1, 0));
+                cartTilePreloaded.put(book, root2);
+            }
             reload();
         } catch (IOException e) {
             e.printStackTrace();

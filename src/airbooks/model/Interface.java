@@ -1,25 +1,56 @@
 package airbooks.model;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Interface {
-    private static final String csvDirectory = Interface.class.getResource("/airbooks/resources/csv").getPath() + "/";
-    private static final Security sec = new Security(
-            csvDirectory + "Secure.csv"
-    );
-    private static final Database db = new Database(
-            csvDirectory + "Student.csv",
-            csvDirectory + "Books.csv",
-            csvDirectory + "SelfCollectStn.csv",
-            csvDirectory + "DistrictAreas.csv"
-    );
+    private static final String csvDirectory = System.getProperty("user.dir") + "/resources/";
+    private static Security sec;
+    private static Database db;
     private static final String transactionFile = csvDirectory + "Transaction.csv";
     private static final ArrayList<Book> rentalCart = new ArrayList<>();
+
+    public static void initialise() {
+        // MUST be called before any other function is run
+        // Try standard init
+        String[] CSVNames = {"Student", "Books", "SelfCollectStn", "DistrictAreas", "Transaction", "Secure"};
+        for (String CSV : CSVNames) {
+            try {
+                new BufferedReader(new FileReader(csvDirectory + CSV + ".csv"));
+            } catch (IOException ex) {
+                // copy missing file
+                try {
+                    File csvDir = new File(csvDirectory);
+                    File csvFile = new File(csvDirectory + CSV + ".csv");
+                    if (!((csvDir.exists() || csvDir.mkdir()) && (csvFile.exists() || csvFile.createNewFile()))) {
+                        throw new IOException("Unable to create csv file.");
+                    }
+                    FileWriter out = new FileWriter(csvFile);
+                    InputStream in = Objects.requireNonNull(Interface.class.getResourceAsStream("/airbooks/resources/csv/" + CSV + ".csv"));
+                    int currByte;
+                    while ((currByte = in.read()) >= 0) {
+                        out.write((char)currByte);
+                    }
+                    out.close();
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        sec = new Security(
+                csvDirectory + "Secure.csv"
+        );
+        db = new Database(
+                csvDirectory + "Student.csv",
+                csvDirectory + "Books.csv",
+                csvDirectory + "SelfCollectStn.csv",
+                csvDirectory + "DistrictAreas.csv"
+        );
+    }
 
     public static int login(String username, String password) {
         if (sec.login(username, password)) {

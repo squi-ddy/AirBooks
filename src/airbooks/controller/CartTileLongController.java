@@ -60,7 +60,7 @@ public class CartTileLongController {
     }
 
     public static ArrayList<CartTileLongController> getSelected() {
-        return selected.size() == 0 ? null : selected;
+        return (selected == null || selected.size() == 0) ? null : selected;
     }
 
     public Book getBook() {

@@ -79,6 +79,7 @@ public class CheckoutController {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(SCSListVBox.getScene().getWindow());
         stage.showAndWait();
+        SCSTileController.reset();
         SCSListVBox.getScene().getWindow().hide();
     }
 

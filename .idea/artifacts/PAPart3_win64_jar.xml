@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="AirBooks-win64:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/jar</output-path>
-    <root id="archive" name="AirBooks-win64.jar">
+  <artifact type="jar" name="PAPart3-win64:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PAPart3_jar</output-path>
+    <root id="archive" name="PAPart3-win64.jar">
       <element id="module-output" name="PAPart3" />
       <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-windows/bin/api-ms-win-core-console-l1-1-0.dll" />
       <element id="file-copy" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-windows/bin/api-ms-win-core-console-l1-2-0.dll" />

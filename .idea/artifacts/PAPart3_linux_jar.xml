@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="AirBooks-linux:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/jar</output-path>
+  <artifact type="jar" name="PAPart3-linux:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PAPart3_jar</output-path>
     <root id="archive" name="AirBooks-linux.jar">
       <element id="module-output" name="PAPart3" />
       <element id="extracted-dir" path="$USER_HOME$/Documents/javafx-sdk/javafx-sdk-16-linux/lib/javafx-swt.jar" path-in-jar="/" />

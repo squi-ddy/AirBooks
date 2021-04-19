@@ -67,6 +67,11 @@ public class LoginController {
             main.showAndWait();
             loginStage.show();
         }
+        if (CartTileLongController.getSelected() != null) {
+            CartTileLongController.getSelected().clear();
+        }
+        passwordTF.clear();
+        usernameTF.clear();
     }
 
     public void init(Stage stage) {
