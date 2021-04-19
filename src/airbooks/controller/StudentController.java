@@ -145,7 +145,7 @@ public class StudentController implements Initializable {
         window.showAndWait();
     }
 
-    private void reload() throws IOException {
+    private void reload() {
         reloadInfo();
         reloadSearch();
         reloadRentalCart();
@@ -180,11 +180,8 @@ public class StudentController implements Initializable {
     }
 
     private void onTrash(Book book) {
-        try {
-            reload();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        reloadInfo();
+        reloadSearch();
     }
 
     @Override
