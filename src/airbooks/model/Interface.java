@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Interface {
-    private static final String csvDirectory = "src/airbooks/resources/csv/";
+    private static final String csvDirectory = Interface.class.getResource("/airbooks/resources/csv").getPath() + "/";
     private static final Security sec = new Security(
             csvDirectory + "Secure.csv"
     );
