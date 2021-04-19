@@ -26,4 +26,7 @@ All features complete. Currently, refinement of the UI and bug-fixing is in prog
 
 ### Todo
 - Change jar artifact output location
-- rename jarMain to JarMain
+- Rename jarMain to JarMain
+- Reset all controllers upon window exit (causes a buh with SCSController)
+- Split student controller reload function into 3 parts: info, rentalCart, search (rentalCart need not be reloaded upon trash)
+- Use Map optimisation in Main.java too
