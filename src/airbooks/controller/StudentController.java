@@ -23,7 +23,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -46,9 +45,6 @@ public class StudentController implements Initializable {
         if (event.getButton() != MouseButton.PRIMARY) return;
         accNameLabel.getScene().getWindow().hide();
     }
-
-    private static final HashMap<Book, AnchorPane> cartTilePreloaded = new HashMap<>();
-    private static final HashMap<Book, VBox> cartTileLongPreloaded = new HashMap<>();
 
     @FXML
     private void checkoutAction() throws IOException {
@@ -145,7 +141,7 @@ public class StudentController implements Initializable {
         window.showAndWait();
     }
 
-    private void reload() {
+    private void reload() throws IOException {
         reloadInfo();
         reloadSearch();
         reloadRentalCart();
@@ -156,12 +152,15 @@ public class StudentController implements Initializable {
         cartInfoLabel.setText(String.format("%d books, $%.2f", Interface.getCart().size(), Interface.getCartSum()));
     }
 
-    private void reloadSearch() {
+    private void reloadSearch() throws IOException {
         rentBooksVBox.getChildren().clear();
         var searchedBooks = Interface.getBooksBySubjectCode(subjCB.getValue());
         for (Book book : searchedBooks) {
-            VBox root = cartTileLongPreloaded.get(book);
-            root.setStyle("-fx-border-color: black; -fx-background-color: white;");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/cart-tile-long.fxml"));
+            VBox root = loader.load();
+            var controller = loader.<CartTileLongController>getController();
+            controller.init(book);
+            VBox.setMargin(root, new Insets(0, 0, 1, 0));
             rentBooksVBox.getChildren().add(root);
         }
         if (searchedBooks.size() == 0) {
@@ -171,17 +170,25 @@ public class StudentController implements Initializable {
         }
     }
 
-    private void reloadRentalCart() {
+    private void reloadRentalCart() throws IOException {
         rentalCartVBox.getChildren().clear();
         var books = Interface.getCart();
         for (Book book : books) {
-            rentalCartVBox.getChildren().add(cartTilePreloaded.get(book));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/cart-tile.fxml"));
+            AnchorPane root = loader.load();
+            loader.<CartTileController>getController().init(book, this::onTrash);
+            VBox.setMargin(root, new Insets(0, 0, 1, 0));
+            rentalCartVBox.getChildren().add(root);
         }
     }
 
     private void onTrash(Book book) {
-        reloadInfo();
-        reloadSearch();
+        try {
+            reloadInfo();
+            reloadSearch();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -191,18 +198,6 @@ public class StudentController implements Initializable {
         subjCB.getSelectionModel().select(0);
         CartTileLongController.setSelectionMode(CartTileLongController.MULTIPLE);
         try {
-            for (Book book : Interface.getBooks()) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/cart-tile-long.fxml"));
-                VBox root = loader.load();
-                loader.<CartTileLongController>getController().init(book);
-                VBox.setMargin(root, new Insets(0, 0, 1, 0));
-                cartTileLongPreloaded.put(book, root);
-                FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/airbooks/view/cart-tile.fxml"));
-                AnchorPane root2 = loader2.load();
-                loader2.<CartTileController>getController().init(book, this::onTrash);
-                VBox.setMargin(root2, new Insets(0, 0, 1, 0));
-                cartTilePreloaded.put(book, root2);
-            }
             reload();
         } catch (IOException e) {
             e.printStackTrace();

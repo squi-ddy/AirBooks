@@ -42,29 +42,18 @@ public class CheckoutController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/scs-tile.fxml"));
                 VBox root = loader.load();
                 var controller = loader.<SCSTileController>getController();
-                controller.init(scs);
+                controller.init(scs, this::onSelect);
                 VBox.setMargin(root, new Insets(0, 0, 1, 0));
                 SCSListVBox.getChildren().add(root);
             }
         }
-        selectButton.setDisable(false);
+        selectButton.setVisible(false);
+        SCSTileController.reset();
     }
 
     @FXML
     private void chooseSCSAction() throws IOException {
         SelfCollectStn scs = SCSTileController.getSelected();
-        if (scs == null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/airbooks/view/error.fxml"));
-            Parent root = loader.load();
-            loader.<ErrorController>getController().init("Invalid input!", "Please select a station.");
-            Stage err = new Stage();
-            err.setScene(new Scene(root));
-            err.setTitle("Error");
-            err.initModality(Modality.WINDOW_MODAL);
-            err.initOwner(selectButton.getScene().getWindow());
-            err.showAndWait();
-            return;
-        }
         int lockerNum = scs.getEmptyLockerNum();
         Locker locker = scs.getLocker(lockerNum);
         String password = locker.placeItem(Interface.getCurrentStudent().getStudentID(), new ArrayList<>(Interface.getCart()));
@@ -92,5 +81,9 @@ public class CheckoutController {
         window.initModality(Modality.WINDOW_MODAL);
         window.initOwner(((Hyperlink)e.getSource()).getScene().getWindow());
         window.showAndWait();
+    }
+
+    private void onSelect(SelfCollectStn scs) {
+        selectButton.setVisible(true);
     }
 }

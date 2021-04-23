@@ -9,6 +9,8 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
+import java.util.function.Consumer;
+
 public class SCSTileController {
     @FXML
     private Label scsNameLabel;
@@ -16,6 +18,8 @@ public class SCSTileController {
     private Label postalCodeLabel;
     @FXML
     private VBox SCSVBox;
+
+    private Consumer<SelfCollectStn> onSelect;
 
     private static SelfCollectStn selected;
 
@@ -33,13 +37,19 @@ public class SCSTileController {
         }
         SCSVBox.setStyle("-fx-border-color: black; -fx-background-color: lightcyan; ");
         selected = (SelfCollectStn) SCSVBox.getUserData();
+        if (onSelect != null) onSelect.accept((SelfCollectStn)SCSVBox.getUserData());
     }
 
-    public void init(SelfCollectStn scs) {
+    public void init(SelfCollectStn scs, Consumer<SelfCollectStn> onSelect) {
         selected = null;
         SCSVBox.setUserData(scs);
         scsNameLabel.setText(Interface.getAreaDetails(scs));
         postalCodeLabel.setText(scs.getPostalCode());
+        this.onSelect = onSelect;
+    }
+
+    public void init(SelfCollectStn scs) {
+        init(scs, null);
     }
 
     public static void reset() {
