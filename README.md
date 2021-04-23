@@ -23,3 +23,7 @@ Online book rental has never been easier!
 
 ### Development stage
 All features complete. Currently, refinement of the UI and bug-fixing is in progress.
+
+### Todo
+- Revert cache for student (lag too long)
+- Reset SCS upon search (yet another reset bug)
