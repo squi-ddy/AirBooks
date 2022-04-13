@@ -16,7 +16,7 @@ Online book rental has never been easier!
 
 <sup>1</sup>Only usable by NUS High Students\
 <sup>2</sup>```src/airbooks/csv/Secure.csv```\
-<sup>3</sup>Not by choice (also this repo is private)
+<sup>3</sup>Not by choice
 
 ## Reason this exists
 - CS3231 Object-Oriented Programming I: Programming Assignment
