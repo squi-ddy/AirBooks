@@ -8,16 +8,21 @@ public class Locker {
     private String lockerPassword;
     private String studentID;
     private ArrayList<Book> booklist;
-    
-    public Locker(int lockerNum){
+    private final SelfCollectStn scs;
+
+    public Locker(int lockerNum, SelfCollectStn scs) {
         if (lockerNum < 0) throw new IllegalArgumentException("Cannot create Locker! Invalid locker number!");
         else this.lockerNum = lockerNum;
         this.lockerPassword = "NUSHabAdmin";
         this.studentID = "h2100000";
         this.booklist = new ArrayList<Book>();
+        this.scs = scs;
+        scs.ft.update(lockerNum, 1);
     }
 
-    public int getLockerNum(){return lockerNum;}
+    public int getLockerNum() {
+        return lockerNum;
+    }
     public String getStudentID(){return studentID;}
 
     public ArrayList<Book> getBookList() {
@@ -34,6 +39,7 @@ public class Locker {
     }
 
     public String placeItem(String studentID, ArrayList<Book> booklist){
+        scs.ft.update(lockerNum, -1);
         lockerPassword = "";
         Random rand = new Random();
         for (int i = 0; i < 8; i++){
@@ -51,6 +57,7 @@ public class Locker {
         if (this.isEmpty())
             return "The locker is empty.";
         if (password.equals(lockerPassword)) {
+            scs.ft.update(lockerNum, 1);
             this.lockerPassword = "NUSHabAdmin";
             this.studentID = "";
             ArrayList<Book> templist = this.getBookList();
