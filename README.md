@@ -8,6 +8,7 @@ Online book rental has never been easier!
 - Rent any of our ***100*** books!
 - Rent books online, get a ***physical*** copy!
 - $25.00 wallet that ***cannot be topped up***!
+- Hit the $25.00 limit? You cannot return books!
 - New account creation ***nonexistent***!
 - ***Island-wide*** service!<sup>1</sup>
 - No collection points inside ***NUS High School***!
